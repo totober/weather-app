@@ -1,7 +1,7 @@
 import {getCurrentData} from "./index"
-import {CurrentWeather} from "./class"
+import {CurrentWeather, Hour} from "./class"
 
-export {test, getCurrentPlace, getCurrentWeather}
+export {test, getCurrentPlace, getCurrentWeather, getHours}
 
 let test = {
     history: "last 7 days",
@@ -22,19 +22,7 @@ let test = {
      return date
  } */
 
- function func() {
-    let forecastArr = data2.forecast.forecastday
-    let historyArr = data3.forecast.forecastday
-    console.log(forecastArr)
-    console.log(historyArr)
-
-    let forecastEl = forecastArr[0].day
-    let historyEl = historyArr[0].day
-
-    console.log(forecastEl)
-    console.log(historyEl)
- }
-
+ 
 
 
 function getCurrentPlace(data) {
@@ -49,8 +37,8 @@ function getCurrentPlace(data) {
     return locationObj
 }
 
-function getCurrentWeather(data){ 
-    let weather = data.current
+function getCurrentWeather(obj){ 
+    //let weather = data.current
     //console.log(weather)
  /*    let weatherObj1 = {
         weatherText: weather.condition.text,
@@ -64,9 +52,34 @@ function getCurrentWeather(data){
         wind: weather.wind_kph,
         precipitation: weather.precip_mm
     } */
-    let weatherObj = new CurrentWeather(weather)
+    let weatherObj = new CurrentWeather(obj.current)
     //console.log(weatherObj1)
-   // console.log(weatherObj)
+   console.log(weatherObj)
 
     return weatherObj
+}
+
+function getHours(obj) {
+
+    let forecastArr = obj.forecast.forecastday
+    //let historyArr = obj.forecast.forecastday
+    console.log(forecastArr)
+    //console.log(historyArr)
+    console.log("laman")
+
+    let [today, tomorrow, last] = forecastArr
+
+    //console.log(today)
+    //console.log(tomorrow)
+    //console.log(last)
+
+    let hourArr = today.hour.map( hour => {
+      return new Hour(hour)
+    })
+
+    console.log("hourArr:", hourArr[5])
+    console.log("today:", today.hour[5])
+
+    
+    //let hourObj = new Hour()
 }

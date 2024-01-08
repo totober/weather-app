@@ -1,5 +1,5 @@
 import img from "../src/img/moon.jpg";
-import {test, getCurrentWeather, getCurrentPlace} from "./objects"
+import {test, getCurrentWeather, getCurrentPlace, getHours} from "./objects"
 
 export {getCurrentData}
 
@@ -8,6 +8,7 @@ let sqr = document.querySelector("div")
 
 sqr.textContent = "no la habias creado salamin!!!"
 
+console.log("dmx")
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
@@ -31,45 +32,46 @@ async function getCurrentData(){
     console.log(data3) 
     
 
-    function objComp (){
+    function compareObjects (){
         let idem = []
         let dif = []
 
+        // comparing current
         let currentFilter = Object.getOwnPropertyNames(data.current)
         console.log(currentFilter)
         let forecastFilter = Object.getOwnPropertyNames(data2.current)
-        console.log(forecastFilter)
+        //console.log(forecastFilter)
 
+        // comparing day
         let forecastArr = data2.forecast.forecastday
         let historyArr = data3.forecast.forecastday
         console.log(forecastArr)
-        console.log(historyArr)
+        //console.log(historyArr)
         
-   
         let forecastDay = forecastArr[0].day
         let historyDay = historyArr[0].day
-        console.log(forecastDay)
-        console.log(historyDay)
+        //console.log(forecastDay)
+        //console.log(historyDay)
 
         let forecastDayArr = Object.getOwnPropertyNames(forecastDay)
-        console.log(forecastDayArr)
         let historyDayArr = Object.getOwnPropertyNames(historyDay)
-        console.log(historyDayArr)
+        //console.log(forecastDayArr)
+        //console.log(historyDayArr)
 
+        // comparing hours
         let forecastHour = forecastArr[0].hour[0]
         let historyHour = historyArr[0].hour[0]
-        console.log(forecastHour)
-        console.log(historyHour)
+        //console.log(forecastHour)
+        //console.log(historyHour)
 
         let forecastHourArr = Object.getOwnPropertyNames(forecastHour)
         let historyHourArr = Object.getOwnPropertyNames(historyHour)
-        console.log(forecastHourArr)
-        console.log(historyHourArr)
+        //console.log(forecastHourArr)
+        //console.log(historyHourArr)
 
-        console.log()
-        
+        // actual comparition        
         forecastHourArr.forEach((prop) =>{
-            historyHourArr.forEach((pr) =>{
+            forecastFilter.forEach((pr) =>{
                 if(prop === pr ){
                     idem.push(prop)
             }})
@@ -78,11 +80,12 @@ async function getCurrentData(){
         console.log("idem:", idem)
     }
 
-    objComp()
+    compareObjects()
 
     try{
         let locationObj = getCurrentPlace(data)
         let weatherObj = getCurrentWeather(data)
+        let hoursObj = getHours(data2)
         //console.log(locationObj)
         //console.log(weatherObj)
 
