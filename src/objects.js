@@ -1,10 +1,40 @@
 import {getCurrentData} from "./index"
+import {CurrentWeather} from "./class"
 
 export {test, getCurrentPlace, getCurrentWeather}
 
 let test = {
-    name: "what im even doing"
+    history: "last 7 days",
+    forecast: "up to 3 days "
 }
+
+/* function getDate(){
+    let rawDate = new Date()
+     let year = rawDate.getFullYear()
+     console.log(year)
+     let month = rawDate.getMonth() + 1
+     console.log(month)
+     let day = rawDate.getDate()
+     console.log(day)
+     let date = year + month + day
+ 
+     console.log(date)
+     return date
+ } */
+
+ function func() {
+    let forecastArr = data2.forecast.forecastday
+    let historyArr = data3.forecast.forecastday
+    console.log(forecastArr)
+    console.log(historyArr)
+
+    let forecastEl = forecastArr[0].day
+    let historyEl = historyArr[0].day
+
+    console.log(forecastEl)
+    console.log(historyEl)
+ }
+
 
 
 function getCurrentPlace(data) {
@@ -22,7 +52,7 @@ function getCurrentPlace(data) {
 function getCurrentWeather(data){ 
     let weather = data.current
     //console.log(weather)
-    let weatherObj = {
+ /*    let weatherObj1 = {
         weatherText: weather.condition.text,
         weatherIcon: weather.condition.icon, 
         cloud: weather.cloud,
@@ -33,8 +63,10 @@ function getCurrentWeather(data){
         humidity: weather.humidity,
         wind: weather.wind_kph,
         precipitation: weather.precip_mm
-    }
-    //console.log(weatherObj)
+    } */
+    let weatherObj = new CurrentWeather(weather)
+    //console.log(weatherObj1)
+   // console.log(weatherObj)
 
     return weatherObj
 }
