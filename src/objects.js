@@ -1,11 +1,58 @@
 import {getCurrentData} from "./index"
-import {CurrentWeather, Hour} from "./class"
+import {CurrentWeather, Day, Hour, Location} from "./class"
 
-export {test, getCurrentPlace, getCurrentWeather, getHours}
+export {test, getLocation, getCurrentWeather, getForecastData, getHistoryData}
 
 let test = {
     history: "last 7 days",
     forecast: "up to 3 days "
+}
+
+function getForecastData(obj) {
+
+    let forecastArr = obj.forecast.forecastday;
+
+    let [todayArr, tomorrowArr, lastDayArr] = forecastArr;
+
+    let todayDate = todayArr.date;
+    let todayDay = new Day(todayArr.day);
+    let todayHoursArr = getHours(todayArr);
+    let todayArrParsed = [todayDate, todayDay, todayHoursArr];
+
+    let tomorrowDate = tomorrowArr.date;
+    let tomorrowDay = new Day(tomorrowArr.day);
+    let tomorrowHoursArr = getHours(tomorrowArr);
+    let tomorroyArrParsed = [tomorrowDate, tomorrowDay, tomorrowHoursArr];
+
+    let lastDayDate = lastDayArr.date;
+    let lastDayDay = new Day(lastDayArr.day);
+    let lastDayHoursArr = getHours(lastDayArr);
+    let lastDayArrParsed = [lastDayDate, lastDayDay, lastDayHoursArr];
+
+    let forecastArrParsed = [todayArrParsed, tomorroyArrParsed, lastDayArrParsed];
+
+    return forecastArrParsed
+
+}
+
+function getHistoryData(obj) {
+
+    let historyArr = obj.forecast.forecastday
+    //console.log(historyArr)
+
+    let [yesterdayArr] = historyArr
+    //console.log(yesterdayArr)
+
+    let yesterdayDate = yesterdayArr.date 
+    //console.log(yesterdayDate)
+
+    let yesterdayHoursArr = getHours(yesterdayArr)
+    //console.log(yesterdayHoursArr)
+
+    let yesterdayDay = new Day(yesterdayArr.day)
+    //console.log(yesterdayDay)
+
+
 }
 
 /* function getDate(){
@@ -22,64 +69,55 @@ let test = {
      return date
  } */
 
- 
+function getLocation(obj) {
+    let location = obj.location
+  
+    let locationObj = new Location(location)
 
-
-function getCurrentPlace(data) {
-    let location = data.location
-    //console.log(location)
-    let locationObj = {
-        localTime: location.localtime,
-        name: location.name,
-        country: location.country
-    }
-    //console.log(locationObj) 
     return locationObj
 }
 
 function getCurrentWeather(obj){ 
     //let weather = data.current
     //console.log(weather)
- /*    let weatherObj1 = {
-        weatherText: weather.condition.text,
-        weatherIcon: weather.condition.icon, 
-        cloud: weather.cloud,
-        tempC: weather.temp_c,
-        tempF: weather.temp_f,
-        tempC_feel: weather.feelsike_c,
-        tempF_feel: weather.feelsike_f,
-        humidity: weather.humidity,
-        wind: weather.wind_kph,
-        precipitation: weather.precip_mm
-    } */
     let weatherObj = new CurrentWeather(obj.current)
     //console.log(weatherObj1)
-   console.log(weatherObj)
+    //console.log(weatherObj)
 
     return weatherObj
 }
 
-function getHours(obj) {
+function getHours(arr) {
 
-    let forecastArr = obj.forecast.forecastday
-    //let historyArr = obj.forecast.forecastday
-    console.log(forecastArr)
-    //console.log(historyArr)
-    console.log("laman")
+    return arr.hour.map( hour => {
+      return new Hour(hour)
+    })
+}
 
-    let [today, tomorrow, last] = forecastArr
+/* function getForecastHours(obj) {
 
-    //console.log(today)
-    //console.log(tomorrow)
-    //console.log(last)
+    console.log(obj)
+    let [today, tomorrow, lastDay] = obj.forecast.forecastday
 
-    let hourArr = today.hour.map( hour => {
+    console.log(today)
+    console.log(tomorrow)
+    console.log(lastDay)
+
+    let todayHourArr = today.hour.map( hour => {
       return new Hour(hour)
     })
 
-    console.log("hourArr:", hourArr[5])
-    console.log("today:", today.hour[5])
+    let tomorrowHourArr = tomorrow.hour.map( hour => {
+        return new Hour(hour)
+    })
 
+    let lastDayHourArr = lastDay.hour.map( hour => {
+        return new Hour(hour)
+    })  
     
-    //let hourObj = new Hour()
-}
+    console.log(todayHourArr)
+    console.log(tomorrowHourArr)
+    console.log(lastDayHourArr)
+
+} */
+

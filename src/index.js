@@ -1,5 +1,5 @@
 import img from "../src/img/moon.jpg";
-import {test, getCurrentWeather, getCurrentPlace, getHours} from "./objects";
+import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects";
 import {compareObjects} from "./auxiliaries";
 
 export {getCurrentData}
@@ -8,8 +8,6 @@ export {getCurrentData}
 let sqr = document.querySelector("div")
 
 sqr.textContent = "no la habias creado salamin!!!"
-
-console.log("dmx")
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
@@ -52,13 +50,25 @@ async function getCurrentData(){
     /// function to compare objects retrieved ///
     //compareObjects(data, data2, data3)
 
+    /* let forecastArr = data2.forecast.forecastday
+    console.log(forecastArr)
+    let historyArr = data3.forecast.forecastday
+    console.log(historyArr) */
 
     try{
-        let locationObj = getCurrentPlace(data)
+
+        let [a,b,c] = getForecastData(data2)
+        console.log(a)
+        console.log(b)
+        console.log(c)
+        getHistoryData(data3)
+
+        let locationObj = getLocation(data)
         let weatherObj = getCurrentWeather(data)
-        let hoursObj = getHours(data2)
+        //let forecastHoursObj = getForecastHours(data2)
         //console.log(locationObj)
         //console.log(weatherObj)
+        //console.log(forecastHoursObj)
 
 
     return {locationObj, weatherObj}
