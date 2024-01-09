@@ -1,5 +1,6 @@
 import img from "../src/img/moon.jpg";
-import {test, getCurrentWeather, getCurrentPlace, getHours} from "./objects"
+import {test, getCurrentWeather, getCurrentPlace, getHours} from "./objects";
+import {compareObjects} from "./auxiliaries";
 
 export {getCurrentData}
 
@@ -19,7 +20,8 @@ let place = "q=Paris"
 
 
 async function getCurrentData(){
-    let response = await fetch("http://api.weatherapi.com/v1/current.json?key=6401a6548a224689902171841233012&q=Buenos-Aires")
+
+   /*  let response = await fetch("http://api.weatherapi.com/v1/current.json?key=6401a6548a224689902171841233012&q=Buenos-Aires")
     let data = await response.json()
     console.log(data)
 
@@ -29,58 +31,27 @@ async function getCurrentData(){
  
     let response3 = await fetch("http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&dt=2024-01-07")
     let data3 = await response3.json()
-    console.log(data3) 
+    console.log(data3)  */
+
+    let [response, response2, response3] = await Promise.all([
+        fetch("http://api.weatherapi.com/v1/current.json?key=6401a6548a224689902171841233012&q=Buenos-Aires"),
+        fetch("http://api.weatherapi.com/v1/forecast.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&days=3"),
+        fetch("http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&dt=2024-01-07")
+    ])
+
+    let [data, data2, data3] = await Promise.all([
+        response.json(),
+        response2.json(),
+        response3.json()
+    ])
+
+    console.log(data)
+    console.log(data2)
+    console.log(data3)
     
+    /// function to compare objects retrieved ///
+    //compareObjects(data, data2, data3)
 
-    function compareObjects (){
-        let idem = []
-        let dif = []
-
-        // comparing current
-        let currentFilter = Object.getOwnPropertyNames(data.current)
-        console.log(currentFilter)
-        let forecastFilter = Object.getOwnPropertyNames(data2.current)
-        //console.log(forecastFilter)
-
-        // comparing day
-        let forecastArr = data2.forecast.forecastday
-        let historyArr = data3.forecast.forecastday
-        console.log(forecastArr)
-        //console.log(historyArr)
-        
-        let forecastDay = forecastArr[0].day
-        let historyDay = historyArr[0].day
-        //console.log(forecastDay)
-        //console.log(historyDay)
-
-        let forecastDayArr = Object.getOwnPropertyNames(forecastDay)
-        let historyDayArr = Object.getOwnPropertyNames(historyDay)
-        //console.log(forecastDayArr)
-        //console.log(historyDayArr)
-
-        // comparing hours
-        let forecastHour = forecastArr[0].hour[0]
-        let historyHour = historyArr[0].hour[0]
-        //console.log(forecastHour)
-        //console.log(historyHour)
-
-        let forecastHourArr = Object.getOwnPropertyNames(forecastHour)
-        let historyHourArr = Object.getOwnPropertyNames(historyHour)
-        //console.log(forecastHourArr)
-        //console.log(historyHourArr)
-
-        // actual comparition        
-        forecastHourArr.forEach((prop) =>{
-            forecastFilter.forEach((pr) =>{
-                if(prop === pr ){
-                    idem.push(prop)
-            }})
-        })
-
-        console.log("idem:", idem)
-    }
-
-    compareObjects()
 
     try{
         let locationObj = getCurrentPlace(data)
