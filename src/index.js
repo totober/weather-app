@@ -2,12 +2,8 @@ import img from "../src/img/moon.jpg";
 import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects";
 import {compareObjects} from "./auxiliaries";
 
-export {getCurrentData}
+export {getData}
 
-
-let sqr = document.querySelector("div")
-
-sqr.textContent = "no la habias creado salamin!!!"
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
@@ -17,9 +13,11 @@ let current = "/current.json"
 let place = "q=Paris"
 
 
-async function getCurrentData(){
+async function getData(){
 
-   /*  let response = await fetch("http://api.weatherapi.com/v1/current.json?key=6401a6548a224689902171841233012&q=Buenos-Aires")
+    /// ONE BY ONE ///
+
+    /* let response = await fetch("http://api.weatherapi.com/v1/current.json?key=6401a6548a224689902171841233012&q=Buenos-Aires")
     let data = await response.json()
     console.log(data)
 
@@ -31,6 +29,9 @@ async function getCurrentData(){
     let data3 = await response3.json()
     console.log(data3)  */
 
+    /// WITH PROMISE.ALL() ///
+
+try{
     let [response, response2, response3] = await Promise.all([
         fetch("http://api.weatherapi.com/v1/current.json?key=6401a6548a224689902171841233012&q=Buenos-Aires"),
         fetch("http://api.weatherapi.com/v1/forecast.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&days=3"),
@@ -43,83 +44,34 @@ async function getCurrentData(){
         response3.json()
     ])
 
-    console.log(data)
-    console.log(data2)
-    console.log(data3)
-    
-    /// function to compare objects retrieved ///
+    /// FUNCTION TO COMPARE OBJECTS RETRIEVED ///
     //compareObjects(data, data2, data3)
 
-    /* let forecastArr = data2.forecast.forecastday
-    console.log(forecastArr)
-    let historyArr = data3.forecast.forecastday
-    console.log(historyArr) */
 
-    try{
+    let forecastArr = getForecastData(data2)
+    let historyArr = getHistoryData(data3)
 
-        let [a,b,c] = getForecastData(data2)
-        console.log(a)
-        console.log(b)
-        console.log(c)
-        getHistoryData(data3)
+    getStructuredForecast(forecastArr)
+    getStructuredHistory(historyArr)
 
-        let locationObj = getLocation(data)
-        let weatherObj = getCurrentWeather(data)
-        //let forecastHoursObj = getForecastHours(data2)
-        //console.log(locationObj)
-        //console.log(weatherObj)
-        //console.log(forecastHoursObj)
-
-
-    return {locationObj, weatherObj}
-
-    } catch(err){
+} catch(err){
         console.log(err)
     }  
 } 
 
-getCurrentData()
+function getStructuredForecast (arr){
 
-//let {locationObj, weatherObj} = await getCurrentData()
-//console.log(weatherObj)
-//console.log(locationObj)
+    let [a,b,c] = arr
+        console.log(a)
+        console.log(b)
+        console.log(c)
 
+} 
 
-
-
-
-
-
-/* async function getCurrentPlace() {
-    let data = await getCurrentData()
-    let location = data.location
-    console.log(location)
-    let locationObj = {
-        localTime: location.localtime,
-        name: location.name,
-        country: location.country
-    }
-    console.log(locationObj) 
-    return locationObj
+async function getStructuredHistory(arr) {
+    let y = arr
+    console.log(y)
 }
- 
-async function getCurrentWeather(){
-    let data = await getCurrentData()
-    let weather = data.current
-    console.log(weather)
-    let weatherObj = {
-        weatherText: weather.condition.text,
-        weatherIcon: weather.condition.icon, 
-        cloud: weather.cloud,
-        tempC: weather.temp_c,
-        tempF: weather.temp_f,
-        tempC_feel: weather.feelsike_c,
-        tempF_feel: weather.feelsike_f,
-        humidity: weather.humidity,
-        wind: weather.wind_kph,
-        precipitation: weather.precip_mm
-    }
-    console.log(weatherObj)
 
-    return weatherObj
-} */
+getData()
+

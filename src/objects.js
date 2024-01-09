@@ -1,4 +1,4 @@
-import {getCurrentData} from "./index"
+import {getData} from "./index"
 import {CurrentWeather, Day, Hour, Location} from "./class"
 
 export {test, getLocation, getCurrentWeather, getForecastData, getHistoryData}
@@ -47,6 +47,7 @@ function getHistoryData(obj) {
     let yesterdayArr = [yesterdayDate, yesterdayDay, yesterdayHoursArr]
     console.log(yesterdayArr)
 
+    return yesterdayArr
 }
 
 function getLocation(obj) {
