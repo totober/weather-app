@@ -1,11 +1,59 @@
-div {
-    width: 500px;
-    height: 500px;
-    border: 2px solid black;
+:root {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --black-color: 
+}
+
+body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+        "header aside"
+        "main aside"
+        "footer footer";
+}
+
+/*/// HEADER ///*/
+
+header {
+    grid-area: header;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(./img/sun.jpg);
-    background-size: contain;
-    background-position: center;
+}
+
+h1 {
+    flex-grow: 1;
+}
+
+.search {
+    flex-grow: 5;
+}
+
+.search label {
+    width: 100%;
+}
+
+input {
+    width: 100%;
+}
+
+/*/// MAIN ///*/
+
+main {
+    grid-area: main;
+    min-height: 400px;
+}
+
+/*/// ASIDE ///*/
+
+aside {
+    grid-area: aside;
+}
+
+/*/// FOOTER ///*/
+
+footer {
+    grid-area: footer;
+    text-align: center;
 }
