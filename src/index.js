@@ -1,10 +1,11 @@
-import img from "../src/img/moon.jpg";
+//import img from "../src/img/moon.jpg";
 import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects";
 import {compareObjects} from "./auxiliaries";
-import {createPrincipal} from "./dom";
+import {createPrincipal, iconSelector} from "./dom";
 
 export {getData}
 
+let principal = document.querySelector(".principal")
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
@@ -49,10 +50,11 @@ try{
 
 function getStructuredForecast (arr){
 
-    let [a,b,c] = arr
-        console.log(a)
-        console.log(b)
-        console.log(c)
+    let [today, tomorrow, lastDay] = arr
+        console.log(today)
+        console.log(tomorrow)
+        console.log(lastDay)
+    
 
 } 
 
@@ -65,6 +67,8 @@ function getWeatherAndLocation(arr){
     let [currentWeather, location] = arr
     console.log(currentWeather)
     console.log(location)
+
+    principal.appendChild(createPrincipal(currentWeather, location)) 
 }
 
 
