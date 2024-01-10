@@ -6,8 +6,8 @@ function compareObjects (data, data2, data3){
     /// COMPARING "CURRENT" ///
     let currentFilter = Object.getOwnPropertyNames(data.current)
     let forecastFilter = Object.getOwnPropertyNames(data2.current)
-    //console.log(currentFilter)
-    //console.log(forecastFilter)
+    console.log(currentFilter)
+    console.log(forecastFilter)
 
     /// COMPARING "DAY" ///
     let forecastArr = data2.forecast.forecastday
@@ -37,7 +37,7 @@ function compareObjects (data, data2, data3){
     //console.log(historyHourArr)
 
     /// ACTUAL COMPARITION ///      
-    forecastHourArr.forEach((prop) =>{
+    currentFilter.forEach((prop) =>{
         forecastFilter.forEach((pr) =>{
             if(prop === pr ){
                 idem.push(prop)

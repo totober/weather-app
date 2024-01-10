@@ -45,7 +45,6 @@ function getHistoryData(obj) {
     let yesterdayHoursArr = getHours(rawYesterdayArr)
 
     let yesterdayArr = [yesterdayDate, yesterdayDay, yesterdayHoursArr]
-    console.log(yesterdayArr)
 
     return yesterdayArr
 }

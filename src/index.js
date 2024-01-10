@@ -1,6 +1,7 @@
 import img from "../src/img/moon.jpg";
 import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects";
 import {compareObjects} from "./auxiliaries";
+import {createPrincipal} from "./dom";
 
 export {getData}
 
@@ -16,29 +17,30 @@ let place = "q=Paris"
 async function getData(){
 
 try{
-    let [response, response2, response3] = await Promise.all([
-        fetch("http://api.weatherapi.com/v1/current.json?key=6401a6548a224689902171841233012&q=Buenos-Aires"),
+    let [response, response2] = await Promise.all([
         fetch("http://api.weatherapi.com/v1/forecast.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&days=3"),
         fetch("http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&dt=2024-01-07")
     ])
 
-    let [data, data2, data3] = await Promise.all([
+    let [dataForecast, dataHistory] = await Promise.all([
         response.json(),
-        response2.json(),
-        response3.json()
+        response2.json()
     ])
 
     /// FUNCTION TO COMPARE OBJECTS RETRIEVED ///
     //compareObjects(data, data2, data3)
 
+    console.log(dataForecast)
+    console.log(dataHistory)
 
-    let weatherAndLocation = [getCurrentWeather(data), getLocation(data)]
-    let forecastArr = getForecastData(data2)
-    let historyArr = getHistoryData(data3)
+    let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)]
+    let forecastArr = getForecastData(dataForecast)
+    let historyArr = getHistoryData(dataHistory)
 
     getStructuredForecast(forecastArr)
     getStructuredHistory(historyArr)
     getWeatherAndLocation(weatherAndLocation)
+
 
 } catch(err){
         console.log(err)
@@ -64,7 +66,6 @@ function getWeatherAndLocation(arr){
     console.log(currentWeather)
     console.log(location)
 }
-
 
 
 getData()
