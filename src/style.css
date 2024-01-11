@@ -68,26 +68,17 @@ main {
     gap: 8px;
 }
 
-.principal, .extra, .proximo {
+.principal, .extra, .near {
     height: 33%;
     border-radius: 8px;
     padding: 8px;
 }
 
-.principal{
+/* /// MAIN - PRINCIPAL /// */
 
-}
+/* /// PRINCIPAL CARD /// */
 
-.extra{
-    background-color: var(--black-el);
-    
-}
-
-.proximo {
-    background-color: var(--black-el);
-}
-
-.card {
+.card.principal {
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-areas: 
@@ -137,9 +128,30 @@ main {
     grid-row: 4/5;
 }
 
-/* .card .fifth {
-    grid-area: ;
-} */
+.card .fifth, .card .sixth {
+    display: none;
+}
+
+/* /// MAIN - NEAR /// */
+
+.near {
+    background-color: var(--black-el);
+}
+
+.card.near {
+
+}
+
+/* /// NEAR CARD /// */
+
+
+
+
+.extra{
+    background-color: var(--black-el);
+    
+}
+
 
 h4 {
     display: inline;

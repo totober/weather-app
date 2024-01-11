@@ -1,11 +1,12 @@
-//import img from "../src/img/moon.jpg";
+
 import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects";
 import {compareObjects} from "./auxiliaries";
-import {createPrincipal, iconSelector} from "./dom";
+import {currentHourCard, fullDayCard} from "./dom";
 
 export {getData}
 
 let principal = document.querySelector(".principal")
+let near = document.querySelector(".near")
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
@@ -55,12 +56,15 @@ function getStructuredForecast (arr){
         console.log(tomorrow)
         console.log(lastDay)
     
+    near.appendChild(fullDayCard("near", today))
+   // near.appendChild(fullDayCard("near", tomorrow))
 
 } 
 
 function getStructuredHistory(arr) {
     let y = arr
     console.log(y)
+    //near.appendChild(fullDayCard("near", y))
 }
 
 function getWeatherAndLocation(arr){
@@ -68,7 +72,7 @@ function getWeatherAndLocation(arr){
     console.log(currentWeather)
     console.log(location)
 
-    principal.appendChild(createPrincipal(currentWeather, location)) 
+    principal.appendChild(currentHourCard("principal", currentWeather, location)) 
 }
 
 

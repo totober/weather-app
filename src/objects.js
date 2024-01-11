@@ -42,6 +42,7 @@ function getHistoryData(obj) {
 
     let yesterdayDate = rawYesterdayArr.date 
     let yesterdayDay = new Day(rawYesterdayArr.day)
+    yesterdayDay.isYesterday = 1;
     let yesterdayHoursArr = getHours(rawYesterdayArr)
 
     let yesterdayArr = [yesterdayDate, yesterdayDay, yesterdayHoursArr]

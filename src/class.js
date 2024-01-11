@@ -12,7 +12,8 @@ class CurrentWeather {
         this.humidity = obj.humidity,
         this.wind = obj.wind_kph,
         this.precipitation = obj.precip_mm,
-        this.isDay = obj.is_day
+        this.isDay = obj.is_day,
+        this.isCelsius = 1
     }
 }
 
@@ -39,7 +40,9 @@ class Day {
         this.precipTotal = obj.totalprecip_mm,
         this.precipChance = obj.daily_chance_of_rain,
         this.snowTotal = obj.totalsnow_cm,
-        this.snowChance = obj.daily_chance_of_snow
+        this.snowChance = obj.daily_chance_of_snow,
+        this.isYesterday = 0,
+        this.isCelsius = 1
     }
 }
 
