@@ -5,8 +5,6 @@ import {currentHourCard, fullDayCard} from "./dom";
 
 export {getData}
 
-let principal = document.querySelector(".principal")
-let near = document.querySelector(".near")
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
@@ -39,17 +37,48 @@ try{
     let forecastArr = getForecastData(dataForecast)
     let historyArr = getHistoryData(dataHistory)
 
-    getStructuredForecast(forecastArr)
-    getStructuredHistory(historyArr)
-    getWeatherAndLocation(weatherAndLocation)
+    //getStructuredForecast(forecastArr)
+    //getStructuredHistory(historyArr)
+    //getWeatherAndLocation(weatherAndLocation)
 
+    getStructuredData([weatherAndLocation, forecastArr, historyArr])
 
 } catch(err){
         console.log(err)
     }  
 } 
 
-function getStructuredForecast (arr){
+function getStructuredData(array){
+
+    let [currentAndLocationArr, forecastArr, historyArr] = array
+    console.log(currentAndLocationArr)
+    console.log(forecastArr)
+    console.log(historyArr)
+
+    let [currentWeather, location] = currentAndLocationArr
+    console.log(currentWeather)
+    console.log(location)
+
+    let [today, tomorrow, lastDay] = forecastArr
+        console.log(today)
+        console.log(tomorrow)
+        console.log(lastDay)
+
+    let yesterday = historyArr
+    console.log(yesterday)
+
+    displayCurrentCard(currentWeather, location)
+
+    displayHistoryAndForecast(yesterday)
+    displayHistoryAndForecast(today)
+    displayHistoryAndForecast(tomorrow)
+    displayHistoryAndForecast(lastDay)
+
+    displayHours(today, location)
+
+}
+
+/* function getStructuredForecast (arr){
 
     let [today, tomorrow, lastDay] = arr
         console.log(today)
@@ -57,23 +86,63 @@ function getStructuredForecast (arr){
         console.log(lastDay)
     
     near.appendChild(fullDayCard("near", today))
-   // near.appendChild(fullDayCard("near", tomorrow))
+    near.appendChild(fullDayCard("near", tomorrow))
+    near.appendChild(fullDayCard("near", lastDay))
+
+    console.log(today[2])
+    //aside.appendChild(currentHourCard(today[2]))
 
 } 
 
 function getStructuredHistory(arr) {
     let y = arr
     console.log(y)
-    //near.appendChild(fullDayCard("near", y))
-}
+    let child = near.firstElementChild
+    console.log(child)
+    near.insertBefore(fullDayCard("near", y), child)
+} */
 
-function getWeatherAndLocation(arr){
+/* function getWeatherAndLocation(arr){
     let [currentWeather, location] = arr
     console.log(currentWeather)
     console.log(location)
 
     principal.appendChild(currentHourCard("principal", currentWeather, location)) 
+} */
+
+function displayCurrentCard(currentWeather, location) {
+
+    let principal = document.querySelector(".principal")
+
+    principal.appendChild(currentHourCard("principal", currentWeather, location))
+
 }
+
+function displayHistoryAndForecast(historyOrForecast){
+
+    let near = document.querySelector(".near")
+
+    near.appendChild(fullDayCard("near", historyOrForecast))
+}
+
+function displayHours(today, location){
+
+    let aside = document.querySelector("aside")
+
+    let hours = today[2]
+
+    let hourstest = [hours[0], hours[1], hours[2]]
+
+   hourstest.forEach( hour => {
+        console.log(hour)
+        aside.appendChild(currentHourCard("aside", hour, location))
+   })
+
+
+    //aside.appendChild(currentHourCard())
+}
+
+
 
 
 getData()

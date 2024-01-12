@@ -100,12 +100,12 @@ function fullDayCard(className, weather, location){
     first.firstElementChild.nextElementSibling.textContent = fullDayObj.weatherText;
     second.textContent = dateFormat;
 
-    third.textContent = `${fullDayObj.maxTempC}º/${fullDayObj.minTempC}º`;
-    if(!fullDayObj.isCelsius){ third.textContent = `${fullDayObj.maxTempF}º/${fullDayObj.minTempF}º`};
+    third.textContent = `${Number.parseInt(fullDayObj.maxTempC)}º/${Number.parseInt(fullDayObj.minTempC)}º`;
+    if(!fullDayObj.isCelsius){ 
+        third.textContent = `${Number.parseInt(fullDayObj.maxTempF)}º/${Number.parseInt(fullDayObj.minTempF)}º`};
 
-    fourth.textContent = `Prob. de precipitaciones: ${fullDayObj.precipChance}%`;
-    if(!fullDayObj.isYesterday){ fourth.textContent = `Prob. de precipitaciones: ${fullDayObj.precipTotal}%`};
-   
+    fourth.textContent = `precip. ${Number.parseInt(fullDayObj.precipChance)}%`;
+    if(fullDayObj.isYesterday){ fourth.textContent = `precip. ${Number.parseInt(fullDayObj.precipTotal)}mm`};
 
     return card
     

@@ -69,8 +69,12 @@ let iconsObj = {
 
 function iconSelector(obj){
 
+    console.log(obj)
     let weather = obj.weatherText;
-    let isDay = obj.isDay || 1;
+    console.log(weather)
+    console.log(obj.isDay)
+    let isDay = undefined ? 1 : obj.isDay
+    console.log(isDay)
 
     /// TERNARY OPERATOR ///
     let nightOrDay = isDay ? iconsObj.dayArr() : iconsObj.nightArr();
