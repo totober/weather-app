@@ -107,15 +107,10 @@ function fullDayCard(className, weather, location){
     if(!fullDayObj.isYesterday){ fourth.textContent = `Prob. de precipitaciones: ${fullDayObj.precipTotal}%`};
    
 
-
-    console.log(card)
     return card
     
 }
 
-function createPrev(){
-
-}
 
 
 
