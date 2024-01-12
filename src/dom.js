@@ -15,26 +15,26 @@ function createCard(){
 
     let card = document.createElement("article");
     let first = document.createElement("div");
-    let second = document.createElement("p");
-    let third = document.createElement("p");
-    let fourth = document.createElement("p");
-    let fifth = document.createElement("p");
-    let sixth = document.createElement("p");
-    let seventh = document.createElement("p");
-    let eighth = document.createElement("p");
+    let place = document.createElement("p");
+    let temp = document.createElement("p");
+    let tempFeel = document.createElement("p");
+    let cloud = document.createElement("p");
+    let precip = document.createElement("p");
+    let time = document.createElement("p");
+    let humidity = document.createElement("p");
 
     let img = document.createElement("img")
     let sub = document.createElement("p")
 
     card.classList.add("card");
     first.classList.add("first");
-    second.classList.add("second");
-    third.classList.add("third");
-    fourth.classList.add("fourth");
-    fifth.classList.add("fifth");
-    sixth.classList.add("sixth");
-    seventh.classList.add("seventh");
-    eighth.classList.add("eighth");
+    place.classList.add("place");
+    temp.classList.add("temp");
+    tempFeel.classList.add("tempFeel");
+    cloud.classList.add("cloud");
+    precip.classList.add("precip");
+    time.classList.add("time");
+    humidity.classList.add("humidity");
 
     img.classList.add("big-img");
     sub.classList.add("sub")
@@ -43,13 +43,13 @@ function createCard(){
     first.appendChild(sub)
 
     card.appendChild(first)
-    card.appendChild(second)
-    card.appendChild(third)
-    card.appendChild(fourth)
-    card.appendChild(fifth)
-    card.appendChild(sixth)
-    card.appendChild(seventh)
-    card.appendChild(eighth)
+    card.appendChild(place)
+    card.appendChild(temp)
+    card.appendChild(tempFeel)
+    card.appendChild(cloud)
+    card.appendChild(precip)
+    card.appendChild(time)
+    card.appendChild(humidity)
 
     return card
 }
@@ -63,18 +63,28 @@ function currentHourCard(className, weather, location){
     card.classList.add(className)
 
     let cardArr = Array.from(card.children)
-    let [first, second, third, fourth, fifth, sixth, seventh, eighth] = cardArr
+    let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
 
     first.firstElementChild.src = iconSelector(weather);
     first.firstElementChild.nextElementSibling.textContent = weather.weatherText;
-    second.textContent = `${location.name}, ${location.country}`;
-    third.textContent = `Temperatura: ${weather.tempC}º/ ST: ${weather.tempC_feel}º`;
+    place.textContent = `${location.name}, ${location.country}`;
+
+
+    temp.textContent = `${weather.tempC}º`;
+    tempFeel.textContent = `ST: ${weather.tempC_feel}º`
     if(!weather.isCelsius){
-        third.textContent = `Temperatura: ${weather.tempF}ºF/ ST: ${weather.tempF_feel}ºF`;
+        temp.textContent = `${weather.tempF}º`;
+        tempFeel.textContent = `ST: ${weather.tempF_feel}º`;
     }
-    fourth.textContent = `Humedad: ${weather.humidity}%`
-    fifth.textContent = `Nubes: ${weather.cloud}%`
-    sixth.textContent = `Prob. de precipitaciones: ${weather.precipitation}%`
+
+    
+    cloud.textContent = `Nubes: ${weather.cloud}%`;
+    precip.textContent = `precip: ${weather.precipitation}%`;
+    humidity.textContent = `Humedad: ${weather.humidity}%`;
+
+    time.textContent = `0${weather.time}:00`;
+    if(weather.time >= 10) {time.textContent = `${weather.time}:00`};
+
 
     console.log(card)
     return card
@@ -91,21 +101,21 @@ function fullDayCard(className, weather, location){
     let [date, fullDayObj, fullHoursArr] = weather
     console.log(fullDayObj)
     
-    let dateFormat = date.slice(5, 7) + "/" + date.slice(8)
+    let dateFormat = `${date.slice(8)}/${date.slice(5, 7)}`;
 
     let cardArr = Array.from(card.children)
-    let [first, second, third, fourth, fifth, sixth, seventh, eighth] = cardArr
+    let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
 
     first.firstElementChild.src = iconSelector(fullDayObj);
     first.firstElementChild.nextElementSibling.textContent = fullDayObj.weatherText;
-    second.textContent = dateFormat;
+    time.textContent = dateFormat;
 
-    third.textContent = `${Number.parseInt(fullDayObj.maxTempC)}º/${Number.parseInt(fullDayObj.minTempC)}º`;
+    temp.textContent = `${Number.parseInt(fullDayObj.maxTempC)}º/${Number.parseInt(fullDayObj.minTempC)}º`;
     if(!fullDayObj.isCelsius){ 
-        third.textContent = `${Number.parseInt(fullDayObj.maxTempF)}º/${Number.parseInt(fullDayObj.minTempF)}º`};
+        temp.textContent = `${Number.parseInt(fullDayObj.maxTempF)}º/${Number.parseInt(fullDayObj.minTempF)}º`};
 
-    fourth.textContent = `precip. ${Number.parseInt(fullDayObj.precipChance)}%`;
-    if(fullDayObj.isYesterday){ fourth.textContent = `precip. ${Number.parseInt(fullDayObj.precipTotal)}mm`};
+    precip.textContent = `precip. ${Number.parseInt(fullDayObj.precipChance)}%`;
+    if(fullDayObj.isYesterday){ precip.textContent = `precip. ${Number.parseInt(fullDayObj.precipTotal)}mm`};
 
     return card
     

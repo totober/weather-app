@@ -18,10 +18,11 @@ class CurrentWeather {
 }
 
 class Hour extends CurrentWeather {
-    constructor(obj){
+    constructor(obj, index){
         super(obj)
-        this.snow = obj.snow_cm
-        this.snowChance = obj.chance_of_snow
+        this.snow = obj.snow_cm,
+        this.snowChance = obj.chance_of_snow,
+        this.time = index
     }
 }
 
@@ -41,6 +42,7 @@ class Day {
         this.precipChance = obj.daily_chance_of_rain,
         this.snowTotal = obj.totalsnow_cm,
         this.snowChance = obj.daily_chance_of_snow,
+        this.isDay = 1,
         this.isYesterday = 0,
         this.isCelsius = 1
     }

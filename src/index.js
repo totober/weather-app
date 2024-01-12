@@ -134,7 +134,6 @@ function displayHours(today, location){
     let hourstest = [hours[0], hours[1], hours[2]]
 
    hourstest.forEach( hour => {
-        console.log(hour)
         aside.appendChild(currentHourCard("aside", hour, location))
    })
 

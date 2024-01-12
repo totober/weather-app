@@ -68,7 +68,7 @@ function getCurrentWeather(obj){
 
 function getHours(arr) {
 
-    return arr.hour.map( hour => {
-      return new Hour(hour)
+    return arr.hour.map( (hour, index) => {
+      return new Hour(hour, index)
     })
 }
