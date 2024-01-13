@@ -8,12 +8,33 @@ import windImg from "./img/wind.svg"
 
 export {currentHourCard, fullDayCard}
 
+function createElement(element, className) {
+
+    let el = document.createElement(element)
+    el.classList.add(className)
+    return el
+}
 
 
 
 function createCard(){
 
-    let card = document.createElement("article");
+    let card = createElement("article", "card")
+    
+    let first = createElement("div", "first")
+    let place = createElement("p", "place")
+    let temp = createElement("p", "temp")
+    let tempFeel = createElement("p", "tempFeel")
+    let cloud = createElement("p", "cloud")
+    let precip = createElement("p", "precip")
+    let humidity = createElement("p", "humidity")
+    let time = createElement("p", "time")
+
+    let img = createElement("img", "big-img")
+    let sub = createElement("p", "sub")
+
+
+ /*    let card = document.createElement("article");
     let first = document.createElement("div");
     let place = document.createElement("p");
     let temp = document.createElement("p");
@@ -24,9 +45,9 @@ function createCard(){
     let humidity = document.createElement("p");
 
     let img = document.createElement("img")
-    let sub = document.createElement("p")
+    let sub = document.createElement("p") */
 
-    card.classList.add("card");
+ /*    card.classList.add("card");
     first.classList.add("first");
     place.classList.add("place");
     temp.classList.add("temp");
@@ -37,73 +58,74 @@ function createCard(){
     humidity.classList.add("humidity");
 
     img.classList.add("big-img");
-    sub.classList.add("sub")
+    sub.classList.add("sub") */
+
+
 
     first.appendChild(img)
     first.appendChild(sub)
 
-    card.appendChild(first)
+   let cardArr = [first, place, temp, tempFeel, cloud, precip, time, humidity]
+
+   cardArr.forEach(element => {card.appendChild(element)})
+
+  /*   card.appendChild(first)
     card.appendChild(place)
     card.appendChild(temp)
     card.appendChild(tempFeel)
     card.appendChild(cloud)
     card.appendChild(precip)
     card.appendChild(time)
-    card.appendChild(humidity)
+    card.appendChild(humidity) */
 
-    return card
+    //cardArr = Array.from(card.children)
+    /* cardArr.forEach(element => {
+        element.style.display = "none"
+    }) */
+    
+
+    return {card, cardArr}
 }
 
 
 
 function currentHourCard(className, weather, location){
 
-
-    let card = createCard()
+    let {card, cardArr} = createCard()
     card.classList.add(className)
 
-    let cardArr = Array.from(card.children)
     let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
 
     first.firstElementChild.src = iconSelector(weather);
     first.firstElementChild.nextElementSibling.textContent = weather.weatherText;
-    place.textContent = `${location.name}, ${location.country}`;
 
-
-    temp.textContent = `${weather.tempC}º`;
     tempFeel.textContent = `ST: ${weather.tempC_feel}º`
     if(!weather.isCelsius){
         temp.textContent = `${weather.tempF}º`;
-        tempFeel.textContent = `ST: ${weather.tempF_feel}º`;
-    }
-
-    
-    cloud.textContent = `Nubes: ${weather.cloud}%`;
-    precip.textContent = `precip: ${weather.precipitation}%`;
-    humidity.textContent = `Humedad: ${weather.humidity}%`;
+        tempFeel.textContent = `ST: ${weather.tempF_feel}º`};
 
     time.textContent = `0${weather.time}:00`;
     if(weather.time >= 10) {time.textContent = `${weather.time}:00`};
 
+    temp.textContent = `${weather.tempC}º`;
+    place.textContent = `${location.name}, ${location.country}`; 
+    cloud.textContent = `Nubes: ${weather.cloud}%`;
+    precip.textContent = `precip: ${weather.precipitation}%`;
+    humidity.textContent = `Humedad: ${weather.humidity}%`;
 
-    console.log(card)
     return card
 }
 
 function fullDayCard(className, weather, location){
 
-    let card = createCard()
+    let {card, cardArr} = createCard()
     card.classList.add(className)
-
-    console.log(weather)
-    console.log(Array.isArray(weather))
 
     let [date, fullDayObj, fullHoursArr] = weather
     console.log(fullDayObj)
     
     let dateFormat = `${date.slice(8)}/${date.slice(5, 7)}`;
 
-    let cardArr = Array.from(card.children)
     let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
 
     first.firstElementChild.src = iconSelector(fullDayObj);

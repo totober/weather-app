@@ -1,7 +1,9 @@
 
-import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects";
+/* import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects"; */
+import {triggerStructuration} from "./objects";
 import {compareObjects} from "./auxiliaries";
 import {currentHourCard, fullDayCard} from "./dom";
+import {triggerDisplay} from "./display";
 
 export {getData}
 
@@ -33,22 +35,32 @@ try{
     console.log(dataForecast)
     console.log(dataHistory)
 
-    let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)]
+ /*    let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)]
     let forecastArr = getForecastData(dataForecast)
-    let historyArr = getHistoryData(dataHistory)
+    let historyArr = getHistoryData(dataHistory) */
+
+   let [weatherAndLocation, forecastArr, historyArr] = triggerStructuration (dataForecast, dataHistory)
 
     //getStructuredForecast(forecastArr)
     //getStructuredHistory(historyArr)
     //getWeatherAndLocation(weatherAndLocation)
 
-    getStructuredData([weatherAndLocation, forecastArr, historyArr])
+    //getStructuredData([weatherAndLocation, forecastArr, historyArr])
+
+
+    /* let [currentWeather, location] = weatherAndLocation
+    let [today, tomorrow, lastDay] = forecastArr
+    let yesterday = historyArr */
+
+  /*   triggerDisplay(currentWeather, location, yesterday, today, tomorrow, lastDay) */
+  triggerDisplay(weatherAndLocation, forecastArr, historyArr)
 
 } catch(err){
         console.log(err)
     }  
 } 
 
-function getStructuredData(array){
+/* function getStructuredData(array){
 
     let [currentAndLocationArr, forecastArr, historyArr] = array
     console.log(currentAndLocationArr)
@@ -67,7 +79,7 @@ function getStructuredData(array){
     let yesterday = historyArr
     console.log(yesterday)
 
-    displayCurrentCard(currentWeather, location)
+    /* displayCurrentCard(currentWeather, location)
 
     displayHistoryAndForecast(yesterday)
     displayHistoryAndForecast(today)
@@ -76,7 +88,9 @@ function getStructuredData(array){
 
     displayHours(today, location)
 
-}
+    displayManager(currentWeather, location, yesterday, today, tomorrow, lastDay)
+
+} */
 
 /* function getStructuredForecast (arr){
 
@@ -110,6 +124,19 @@ function getStructuredHistory(arr) {
     principal.appendChild(currentHourCard("principal", currentWeather, location)) 
 } */
 
+/* function displayManager(currentWeather, location, yesterday, today, tomorrow, lastDay){
+
+    displayCurrentCard(currentWeather, location)
+
+    displayHistoryAndForecast(yesterday)
+    displayHistoryAndForecast(today)
+    displayHistoryAndForecast(tomorrow)
+    displayHistoryAndForecast(lastDay)
+
+    displayHours(today, location)
+}
+
+
 function displayCurrentCard(currentWeather, location) {
 
     let principal = document.querySelector(".principal")
@@ -129,9 +156,10 @@ function displayHours(today, location){
 
     let aside = document.querySelector("aside")
 
-    let hours = today[2]
+    let hours = today.splice()
 
-    let hourstest = [hours[0], hours[1], hours[2]]
+    let hourstest = [hours[0], hours[1], hours[2], hours[3], hours[4], hours[5],
+                    hours[6], hours[7], hours[8]]
 
    hourstest.forEach( hour => {
         aside.appendChild(currentHourCard("aside", hour, location))
@@ -139,7 +167,7 @@ function displayHours(today, location){
 
 
     //aside.appendChild(currentHourCard())
-}
+} */
 
 
 
