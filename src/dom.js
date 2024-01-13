@@ -8,6 +8,7 @@ import windImg from "./img/wind.svg"
 
 export {currentHourCard, fullDayCard}
 
+
 function createElement(element, className) {
 
     let el = document.createElement(element)
@@ -15,13 +16,11 @@ function createElement(element, className) {
     return el
 }
 
-
-
 function createCard(){
 
     let card = createElement("article", "card")
     
-    let first = createElement("div", "first")
+    //let first = createElement("div", "first")
     let place = createElement("p", "place")
     let temp = createElement("p", "temp")
     let tempFeel = createElement("p", "tempFeel")
@@ -34,49 +33,12 @@ function createCard(){
     let sub = createElement("p", "sub")
 
 
- /*    let card = document.createElement("article");
-    let first = document.createElement("div");
-    let place = document.createElement("p");
-    let temp = document.createElement("p");
-    let tempFeel = document.createElement("p");
-    let cloud = document.createElement("p");
-    let precip = document.createElement("p");
-    let time = document.createElement("p");
-    let humidity = document.createElement("p");
+    /* first.appendChild(img)
+    first.appendChild(sub) */
 
-    let img = document.createElement("img")
-    let sub = document.createElement("p") */
-
- /*    card.classList.add("card");
-    first.classList.add("first");
-    place.classList.add("place");
-    temp.classList.add("temp");
-    tempFeel.classList.add("tempFeel");
-    cloud.classList.add("cloud");
-    precip.classList.add("precip");
-    time.classList.add("time");
-    humidity.classList.add("humidity");
-
-    img.classList.add("big-img");
-    sub.classList.add("sub") */
-
-
-
-    first.appendChild(img)
-    first.appendChild(sub)
-
-   let cardArr = [first, place, temp, tempFeel, cloud, precip, time, humidity]
+   let cardArr = [img, sub, place, temp, tempFeel, cloud, precip, time, humidity]
 
    cardArr.forEach(element => {card.appendChild(element)})
-
-  /*   card.appendChild(first)
-    card.appendChild(place)
-    card.appendChild(temp)
-    card.appendChild(tempFeel)
-    card.appendChild(cloud)
-    card.appendChild(precip)
-    card.appendChild(time)
-    card.appendChild(humidity) */
 
     //cardArr = Array.from(card.children)
     /* cardArr.forEach(element => {
@@ -94,10 +56,14 @@ function currentHourCard(className, weather, location){
     let {card, cardArr} = createCard()
     card.classList.add(className)
 
-    let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
 
-    first.firstElementChild.src = iconSelector(weather);
-    first.firstElementChild.nextElementSibling.textContent = weather.weatherText;
+    /* let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr */
+    let [img, sub, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
+
+   /*  first.firstElementChild.src = iconSelector(weather);
+    first.firstElementChild.nextElementSibling.textContent = weather.weatherText; */
+    img.src = iconSelector(weather);
+    sub.textContent = weather.weatherText;
 
     tempFeel.textContent = `ST: ${weather.tempC_feel}º`
     if(!weather.isCelsius){
@@ -126,10 +92,13 @@ function fullDayCard(className, weather, location){
     
     let dateFormat = `${date.slice(8)}/${date.slice(5, 7)}`;
 
-    let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
+    /* let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr */
+    let [img, sub, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr
 
-    first.firstElementChild.src = iconSelector(fullDayObj);
-    first.firstElementChild.nextElementSibling.textContent = fullDayObj.weatherText;
+    /* first.firstElementChild.src = iconSelector(fullDayObj);
+    first.firstElementChild.nextElementSibling.textContent = fullDayObj.weatherText; */
+    img.src = iconSelector(fullDayObj);
+    sub.textContent = fullDayObj.weatherText;
     time.textContent = dateFormat;
 
     temp.textContent = `${Number.parseInt(fullDayObj.maxTempC)}º/${Number.parseInt(fullDayObj.minTempC)}º`;

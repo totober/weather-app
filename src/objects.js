@@ -2,14 +2,14 @@ import {getData} from "./index"
 import {CurrentWeather, Day, Hour, Location} from "./class"
 
 /* export {test, getLocation, getCurrentWeather, getForecastData, getHistoryData} */
-export {triggerStructuration}
+export {triggerDataStructuration}
 
 let test = {
     history: "last 7 days",
     forecast: "up to 3 days "
 }
 
-function triggerStructuration (dataForecast, dataHistory){
+function triggerDataStructuration (dataForecast, dataHistory){
 
     let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)]
     let forecastArr = getForecastData(dataForecast)

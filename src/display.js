@@ -1,9 +1,8 @@
 import {currentHourCard, fullDayCard} from "./dom"
 
-export {triggerDisplay}
+export {triggerDataDisplay}
 
-function triggerDisplay(/* currentWeather, location, yesterday, today, tomorrow, lastDay */
-                        weatherAndLocation, forecastArr, historyArr){
+function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr){
 
     let [currentWeather, location] = weatherAndLocation
     let [today, tomorrow, lastDay] = forecastArr
@@ -38,7 +37,7 @@ function displayHistoryAndForecast(historyOrForecast){
 function displayHours(today, location){
 
     let aside = document.querySelector("aside")
-    
+
     let hours = today[2]
 
     let hourstest = [hours[0], hours[1], hours[2], hours[3], hours[4], hours[5],
@@ -47,7 +46,4 @@ function displayHours(today, location){
    hourstest.forEach( hour => {
         aside.appendChild(currentHourCard("aside", hour, location))
    })
-
-
-    //aside.appendChild(currentHourCard())
 }

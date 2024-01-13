@@ -1,9 +1,9 @@
 
 /* import {test, getCurrentWeather, getLocation, getForecastHours, getForecastData, getHistoryData} from "./objects"; */
-import {triggerStructuration} from "./objects";
+import {triggerDataStructuration} from "./objects";
 import {compareObjects} from "./auxiliaries";
 import {currentHourCard, fullDayCard} from "./dom";
-import {triggerDisplay} from "./display";
+import {triggerDataDisplay} from "./display";
 
 export {getData}
 
@@ -39,7 +39,7 @@ try{
     let forecastArr = getForecastData(dataForecast)
     let historyArr = getHistoryData(dataHistory) */
 
-   let [weatherAndLocation, forecastArr, historyArr] = triggerStructuration (dataForecast, dataHistory)
+   let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
 
     //getStructuredForecast(forecastArr)
     //getStructuredHistory(historyArr)
@@ -53,7 +53,7 @@ try{
     let yesterday = historyArr */
 
   /*   triggerDisplay(currentWeather, location, yesterday, today, tomorrow, lastDay) */
-  triggerDisplay(weatherAndLocation, forecastArr, historyArr)
+  triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
 
 } catch(err){
         console.log(err)
