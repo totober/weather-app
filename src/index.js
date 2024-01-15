@@ -7,6 +7,25 @@ import {triggerDataDisplay} from "./display";
 
 export {getData}
 
+window.addEventListener("load", init)
+let input = document.querySelector("input")
+input.addEventListener("keydown", getInputValue)
+
+function init() {
+    getData("buenos aires")
+}
+
+function getInputValue(e){
+
+    if(e.key !== "Enter") {return}
+
+
+    let inputVal = input.value
+
+    getData(inputVal)
+    
+
+}
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
@@ -16,12 +35,13 @@ let current = "/current.json"
 let place = "q=Paris"
 
 
-async function getData(){
+async function getData(inputVal){
 
+    console.log(inputVal)
 try{
     let [response, response2] = await Promise.all([
-        fetch("http://api.weatherapi.com/v1/forecast.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&days=3"),
-        fetch("http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=Buenos-Aires&dt=2024-01-07")
+        fetch(`http://api.weatherapi.com/v1/forecast.json?key=6401a6548a224689902171841233012&q=${inputVal}&days=3`),
+        fetch(`http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=${inputVal}&dt=2024-01-07`)
     ])
 
     let [dataForecast, dataHistory] = await Promise.all([
@@ -59,6 +79,7 @@ try{
         console.log(err)
     }  
 } 
+
 
 /* function getStructuredData(array){
 
@@ -172,5 +193,5 @@ function displayHours(today, location){
 
 
 
-getData()
+//getData()
 

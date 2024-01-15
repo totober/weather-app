@@ -1,15 +1,15 @@
-import sunImg from "./img/sun.svg"
-import moonImg from "./img/moon.svg"
-import cloudyImg from "./img/cloudy.svg"
-import cloudyDayImg from "./img/cloudyDay.svg"
-import cloudyNightImg from "./img/cloudyNight.svg"
-import thunderImg from "./img/thunder.svg"
-import fogImg from "./img/fog.svg"
-import rainImg from "./img/rain.svg"
-import rainDayImg from "./img/rainDay.svg"
-import rainNightImg from "./img/rainNight.svg"
-import sleetImg from "./img/sleet.svg"
-import snowImg from "./img/snow.svg"
+import sunImg from "./img/sun-s.svg"
+import moonImg from "./img/moon-s.svg"
+import cloudyImg from "./img/cloudy-s.svg"
+import cloudyDayImg from "./img/cloudyDay-s.svg"
+import cloudyNightImg from "./img/cloudyNight-s.svg"
+import thunderImg from "./img/thunder-s.svg"
+import fogImg from "./img/fog-s.svg"
+import rainImg from "./img/rain-s.svg"
+import rainDayImg from "./img/rainDay-s.svg"
+import rainNightImg from "./img/rainNight-s.svg"
+import sleetImg from "./img/sleet-s.svg"
+import snowImg from "./img/snow-s.svg"
 
 
 export {compareObjects, iconSelector}
@@ -74,6 +74,7 @@ function iconSelector(obj){
     console.log(weather)
     console.log(obj.isDay)
     let isDay = obj.isDay 
+    console.log(isDay)
   
 
     /// TERNARY OPERATOR ///

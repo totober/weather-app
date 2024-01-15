@@ -12,7 +12,7 @@ class CurrentWeather {
         this.humidity = obj.humidity,
         this.wind = obj.wind_kph,
         this.precipitation = obj.precip_mm,
-        this.isDay = obj.is_day,
+        this.isDay = obj.is_day ? true : false,
         this.isCelsius = 1
     }
 }
@@ -37,13 +37,14 @@ class Day {
         this.avgTempC = obj.avgtemp_c,
         this.avgTempF = obj.avgtemp_f,
         this.avgHumidity = obj.avghumidity,
-        this.maxWind = obj.maxwind_kph,
+        this.windMax = obj.maxwind_kph,
         this.precipTotal = obj.totalprecip_mm,
         this.precipChance = obj.daily_chance_of_rain,
-        this.snowTotal = obj.totalsnow_cm,
+        this.snow = obj.totalsnow_cm,
         this.snowChance = obj.daily_chance_of_snow,
-        this.isDay = 1,
-        this.isYesterday = 0,
+        this.uv = obj.uv,
+        this.isDay = true,
+        this.isHistory = false,
         this.isCelsius = 1
     }
 }
