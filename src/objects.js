@@ -72,14 +72,20 @@ function getLocation(obj) {
 function getCurrentWeather(obj){ 
 
     let weather = obj.current
-    let weatherObj = new CurrentWeather(weather)
+    let date = obj.forecast.forecastday[0].date
+    let weatherObj = new CurrentWeather(weather, date)
 
     return weatherObj
 }
 
 function getHours(arr) {
 
-    return arr.hour.map( (hour, index) => {
-      return new Hour(hour, index)
+    console.log("hours", arr)
+
+
+    return arr.hour.map( (hour) => {
+        let date = hour.time.slice(0, 10)
+        let time = hour.time.slice(11)
+      return new Hour(hour, date, time)
     })
 }

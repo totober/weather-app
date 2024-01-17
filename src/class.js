@@ -1,7 +1,7 @@
 export {CurrentWeather, Day, Hour, Location}
 
 class CurrentWeather {
-    constructor(obj){
+    constructor(obj, date){
         this.weatherText = obj.condition.text,
         this.weatherIcon = obj.condition.icon, 
         this.cloud = obj.cloud,
@@ -11,18 +11,20 @@ class CurrentWeather {
         this.tempF_feel = obj.feelslike_f,
         this.humidity = obj.humidity,
         this.wind = obj.wind_kph,
-        this.precipitation = obj.precip_mm,
+        this.precipTotal = obj.precip_mm,
+        this.date = date,
         this.isDay = obj.is_day ? true : false,
-        this.isCelsius = 1
+        this.isCelsius = true
     }
 }
 
 class Hour extends CurrentWeather {
-    constructor(obj, index){
+    constructor(obj, date, time){
         super(obj)
-        this.snow = obj.snow_cm,
+        this.snowTotal = obj.snow_cm,
         this.snowChance = obj.chance_of_snow,
-        this.time = index
+        this.date = date,
+        this.time = time
     }
 }
 
@@ -34,18 +36,18 @@ class Day {
         this.maxTempF = obj.maxtemp_f,
         this.minTempC = obj.mintemp_c,
         this.minTempF = obj.mintemp_f,
-        this.avgTempC = obj.avgtemp_c,
-        this.avgTempF = obj.avgtemp_f,
+        this.tempC = obj.avgtemp_c,
+        this.tempF = obj.avgtemp_f,
         this.avgHumidity = obj.avghumidity,
-        this.windMax = obj.maxwind_kph,
+        this.wind = obj.maxwind_kph,
         this.precipTotal = obj.totalprecip_mm,
         this.precipChance = obj.daily_chance_of_rain,
-        this.snow = obj.totalsnow_cm,
+        this.snowTotal = obj.totalsnow_cm,
         this.snowChance = obj.daily_chance_of_snow,
         this.uv = obj.uv,
         this.isDay = true,
         this.isHistory = false,
-        this.isCelsius = 1
+        this.isCelsius = true
     }
 }
 

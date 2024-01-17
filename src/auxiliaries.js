@@ -69,13 +69,8 @@ let iconsObj = {
 
 function iconSelector(obj){
 
-    console.log(obj)
     let weather = obj.weatherText;
-    console.log(weather)
-    console.log(obj.isDay)
     let isDay = obj.isDay 
-    console.log(isDay)
-  
 
     /// TERNARY OPERATOR ///
     let nightOrDay = isDay ? iconsObj.dayArr() : iconsObj.nightArr();
@@ -158,6 +153,48 @@ function iconSelector(obj){
 
     return img
 }
+
+let btnUp = document.querySelector(".up")
+let btnDown = document.querySelector(".down")
+
+btnUp.addEventListener("click", slider)
+btnDown.addEventListener("click", slider)
+
+let val = 0
+function slider(e){
+
+let slider = document.querySelector(".slider")
+let sliderArr = Array.from(slider.children)
+
+
+console.log("VALUE: ", val)
+let value = this.classList.contains("up") ? -8 : 8; 
+
+      if(val <= (-96) ||  val>= 96 ){return}
+
+
+        for (let i = 0; i <= 3; i++){
+
+            val += value
+            slider.style.marginTop = `${val}rem`
+            console.log(val)
+            
+            if(val <= (-96) ||  val>= 96 ){break}
+        }
+       
+        }
+       
+    
+
+
+
+
+       
+     
+
+        
+        
+
 
 
 

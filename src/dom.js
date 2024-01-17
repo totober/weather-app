@@ -1,12 +1,6 @@
 import { iconSelector } from "./auxiliaries"
 
-import cloudOneImg from "./img/cloudy-s.svg"
-import menuImg from "./img/menu-m.svg"
-import tempImg from "./img/temperature-s.svg"
-import windImg from "./img/wind-s.svg"
-
-
-export {currentHourCard, fullDayCard}
+export {currentHourCard, fullDayCard, setCardData}
 
 
 function createElement(element, className) {
@@ -20,10 +14,11 @@ function createCard(){
 
     let card = createElement("article", "card")
     
-    //let first = createElement("div", "first")
     let place = createElement("p", "place")
     let temp = createElement("p", "temp")
     let tempFeel = createElement("p", "tempFeel")
+    let tempMinMax = createElement("p", "tempMinMax")
+    let date = createElement("p", "date")
     let cloud = createElement("p", "cloud")
     let precip = createElement("p", "precip")
     let humidity = createElement("p", "humidity")
@@ -35,36 +30,21 @@ function createCard(){
     let img = createElement("img", "img")
     let sub = createElement("p", "sub")
 
-
-    /* first.appendChild(img)
-    first.appendChild(sub) */
-
-   let cardArr = [img, sub, place, temp, tempFeel, cloud, precip, time, humidity, snow, wind, uv]
+   let cardArr = [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv]
 
    cardArr.forEach(element => {card.appendChild(element)})
-
-    //cardArr = Array.from(card.children)
-    /* cardArr.forEach(element => {
-        element.style.display = "none"
-    }) */
-    
 
     return {card, cardArr}
 }
 
 
-
-function currentHourCard(className, weather, location){
+/* function currentHourCard(className, weather, location){
 
     let {card, cardArr} = createCard()
     card.classList.add(className)
 
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv] = cardArr
 
-    /* let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr */
-    let [img, sub, place, temp, tempFeel, cloud, precip, time, humidity, snow, wind, uv] = cardArr
-
-   /*  first.firstElementChild.src = iconSelector(weather);
-    first.firstElementChild.nextElementSibling.textContent = weather.weatherText; */
     img.src = iconSelector(weather);
     sub.textContent = weather.weatherText;
 
@@ -75,16 +55,15 @@ function currentHourCard(className, weather, location){
         temp.textContent = `${Number.parseInt(weather.tempF)}º`;
         tempFeel.textContent = `ST: ${Number.parseInt(weather.tempF_feel)}º`};
 
-    time.textContent = `0${weather.time}:00`;
-    if(weather.time >= 10) {time.textContent = `${weather.time}:00`};
-
     place.textContent = `${location.name}, ${location.country}`; 
     cloud.textContent = `Nubes: ${weather.cloud}%`;
-    precip.textContent = `precip: ${weather.precipitation}%`;
+    precip.textContent = `precip: ${weather.precipTotal}mm`;
     humidity.textContent = `Humedad: ${weather.humidity}%`;
     snow.textContent = `snow ${weather.snowChance}%`;
+    time.textContent = weather.time;
 
-    return card
+
+    return  card
 }
 
 function fullDayCard(className, weather, location){
@@ -92,16 +71,13 @@ function fullDayCard(className, weather, location){
     let {card, cardArr} = createCard()
     card.classList.add(className)
 
-    let [date, fullDayObj, fullHoursArr] = weather
+    let [dateObj, fullDayObj, fullHoursArr] = weather
     console.log(fullDayObj)
     
-    let dateFormat = `${date.slice(8)}/${date.slice(5, 7)}`;
+    let dateFormat = `${dateObj.slice(8)}/${dateObj.slice(5, 7)}`;
 
-    /* let [first, place, temp, tempFeel, cloud, precip, time, humidity] = cardArr */
-    let [img, sub, place, temp, tempFeel, cloud, precip, time, humidity, snow, wind, uv] = cardArr
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv] = cardArr
 
-    /* first.firstElementChild.src = iconSelector(fullDayObj);
-    first.firstElementChild.nextElementSibling.textContent = fullDayObj.weatherText; */
     img.src = iconSelector(fullDayObj);
     sub.textContent = fullDayObj.weatherText;
     time.textContent = dateFormat;
@@ -120,15 +96,48 @@ function fullDayCard(className, weather, location){
     snow.textContent = `${fullDayObj.snowChance} %`;
     if(fullDayObj.isHistory){ 
         precip.textContent = `${Number.parseInt(fullDayObj.precipTotal)} mm`;
-        snow.textContent = `${Number.parseInt(fullDayObj.snow)} mm`
+        snow.textContent = `${Number.parseInt(fullDayObj.snowTotal)} mm`
     };
 
 
     return card
-    
+} */
+
+
+function setCardData(className, weatherObj, locationObj, dateObj) {
+
+    let {card, cardArr} = createCard()
+    card.classList.add(className)
+
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv] = cardArr
+
+    img.src = iconSelector(weatherObj);
+    sub.textContent = weatherObj.weatherText;
+    place.textContent = `${locationObj.name}, ${locationObj.country}`; 
+    date.textContent = `${dateObj.slice(8)}/${dateObj.slice(5, 7)}`;
+    time.textContent = weatherObj.time;
+    cloud.textContent = `${weatherObj.cloud} %`;
+    humidity.textContent = `${weatherObj.avgHumidity} %`;
+    wind.textContent = `${Number.parseInt(weatherObj.wind)} km`;
+    uv.textContent = weatherObj.uv;
+
+    temp.textContent = `${Number.parseInt(weatherObj.tempC)}º`;
+    tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempC_feel)}º`
+    tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempC)}º/${Number.parseInt(weatherObj.minTempC)}º`;
+    if(!weatherObj.isCelsius){ 
+        temp.textContent = `${Number.parseInt(weatherObj.tempF)}º`;
+        tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempF_feel)}º`;
+        tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempF)}º/${Number.parseInt(weatherObj.minTempF)}º`;
+    } 
+
+    precip.textContent = `${Number.parseInt(weatherObj.precipChance)} %`;
+    snow.textContent = `${weatherObj.snowChance} %`;
+    if(weatherObj.isHistory){ 
+        precip.textContent = `${Number.parseInt(weatherObj.precipTotal)} mm`;
+        snow.textContent = `${Number.parseInt(weatherObj.snowTotal)} mm`
+    };
+
+    return card
 }
-
-
-
 
 
