@@ -20,7 +20,7 @@ function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr){
 
     displayHours(forecastArr, location)
 
-    renderExtra(forecastArr)
+    renderExtra(forecastArr, location)
 }
 
 
@@ -51,10 +51,10 @@ function displayHours(forecastArr, location){
     let [today, tomorrow, lastDay] = forecastArr
 
 
-    let hours = today[2]
+    let hours = today.hours
 
    hours.forEach( hour => {
-        slider.appendChild(currentHourCard("aside", hour, location))
+        slider.appendChild(setCardData("aside", hour, location))
    })
 }
 
@@ -70,13 +70,13 @@ function displayHours(forecastArr, location){
 
 } */
 
-function renderPrincipal(currentWeather, location){
+function renderPrincipal(weather, location){
     console.log("a ver como funca")
     
     let principal = document.querySelector(".principal")
     principal.innerHTML = ""
 
-    principal.appendChild(setCardData("principal", currentWeather, location, currentWeather.date))
+    principal.appendChild(setCardData("principal", weather, location))
 
 }
 
@@ -114,22 +114,30 @@ function renderNear(forecastArr, historyArr, location){
     console.log("yesterday", yesterday)
 
 
-    near.appendChild(setCardData("near", yesterday[1], location, yesterday[0]))
-    near.appendChild(setCardData("near", today[1], location, today[0]))
-    near.appendChild(setCardData("near", tomorrow[1], location, tomorrow[0]))
-    near.appendChild(setCardData("near", lastDay[1], location, lastDay[0]))
+    near.appendChild(setCardData("near", yesterday.day, location))
+    near.appendChild(setCardData("near", today.day, location))
+    near.appendChild(setCardData("near", tomorrow.day, location))
+    near.appendChild(setCardData("near", lastDay.day, location))
 }
 
 
 
 
-function renderExtra(forecastArr){
+function renderExtra(forecastArr, location){
 
     let [today, tomorrow, lastDay] = forecastArr
 
     let extra = document.querySelector(".extra")
     extra.innerHTML = "";
 
-    extra.appendChild(fullDayCard("extra", today));
+    extra.appendChild(setCardData("extra", today.day, location));
 
 }
+
+/* function eventDisplayListener(e){
+
+    let target = e.target
+
+
+
+} */

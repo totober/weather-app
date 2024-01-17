@@ -15,6 +15,12 @@ function triggerDataStructuration (dataForecast, dataHistory){
     let forecastArr = getForecastData(dataForecast)
     let historyArr = getHistoryData(dataHistory)
 
+    /* console.log(weatherAndLocation)
+ 
+    console.log(historyArr) */
+
+    console.log(forecastArr)
+
     return [weatherAndLocation, forecastArr, historyArr]
 
 }
@@ -22,23 +28,30 @@ function triggerDataStructuration (dataForecast, dataHistory){
 function getForecastData(obj) {
 
     let rawForecastArr = obj.forecast.forecastday;
+    let rawLocation = obj.location
 
     let [rawTodayArr, rawTomorrowArr, rawLastDayArr] = rawForecastArr;
 
-    let todayDate = rawTodayArr.date;
+ /*    let todayDate = rawTodayArr.date;
     let todayDay = new Day(rawTodayArr.day);
     let todayHoursArr = getHours(rawTodayArr);
-    let todayArr = [todayDate, todayDay, todayHoursArr];
+    let todayArr = [todayDate, todayDay, todayHoursArr]; */
 
-    let tomorrowDate = rawTomorrowArr.date;
+    let todayDay = new Day(rawTodayArr.day, rawTodayArr.date);
+    let todayHoursArr = getHours(rawTodayArr);
+    let todayArr = {day: todayDay, hours: todayHoursArr};
+
+/*     let tomorrowDate = rawTomorrowArr.date;
     let tomorrowDay = new Day(rawTomorrowArr.day);
     let tomorrowHoursArr = getHours(rawTomorrowArr);
-    let tomorrowArr = [tomorrowDate, tomorrowDay, tomorrowHoursArr];
+    let tomorrowArr = [tomorrowDate, tomorrowDay, tomorrowHoursArr]; */
+    let tomorrowDay = new Day(rawTomorrowArr.day, rawTomorrowArr.date);
+    let tomorrowHoursArr = getHours(rawTomorrowArr);
+    let tomorrowArr = {day: tomorrowDay, hours: tomorrowHoursArr};
 
-    let lastDayDate = rawLastDayArr.date;
-    let lastDayDay = new Day(rawLastDayArr.day);
+    let lastDayDay = new Day(rawLastDayArr.day, rawLastDayArr.date);
     let lastDayHoursArr = getHours(rawLastDayArr);
-    let lastDayArr = [lastDayDate, lastDayDay, lastDayHoursArr];
+    let lastDayArr = {day: lastDayDay, hours: lastDayHoursArr};
 
     let forecastArr = [todayArr, tomorrowArr, lastDayArr];
 
@@ -47,16 +60,13 @@ function getForecastData(obj) {
 
 function getHistoryData(obj) {
 
-    let rawHistoryArr = obj.forecast.forecastday
+    let [rawYesterdayArr] = obj.forecast.forecastday
 
-    let [rawYesterdayArr] = rawHistoryArr
-
-    let yesterdayDate = rawYesterdayArr.date 
-    let yesterdayDay = new Day(rawYesterdayArr.day)
+    let yesterdayDay = new Day(rawYesterdayArr.day, rawYesterdayArr.date )
     yesterdayDay.isHistory = true;
     let yesterdayHoursArr = getHours(rawYesterdayArr)
 
-    let yesterdayArr = [yesterdayDate, yesterdayDay, yesterdayHoursArr]
+    let yesterdayArr = {day: yesterdayDay, hours: yesterdayHoursArr}
 
     return yesterdayArr
 }
@@ -79,9 +89,6 @@ function getCurrentWeather(obj){
 }
 
 function getHours(arr) {
-
-    console.log("hours", arr)
-
 
     return arr.hour.map( (hour) => {
         let date = hour.time.slice(0, 10)

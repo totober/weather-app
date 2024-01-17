@@ -1,6 +1,6 @@
 import { iconSelector } from "./auxiliaries"
 
-export {currentHourCard, fullDayCard, setCardData}
+export {setCardData}
 
 
 function createElement(element, className) {
@@ -104,7 +104,7 @@ function fullDayCard(className, weather, location){
 } */
 
 
-function setCardData(className, weatherObj, locationObj, dateObj) {
+function setCardData(className, weatherObj, locationObj) {
 
     let {card, cardArr} = createCard()
     card.classList.add(className)
@@ -114,7 +114,7 @@ function setCardData(className, weatherObj, locationObj, dateObj) {
     img.src = iconSelector(weatherObj);
     sub.textContent = weatherObj.weatherText;
     place.textContent = `${locationObj.name}, ${locationObj.country}`; 
-    date.textContent = `${dateObj.slice(8)}/${dateObj.slice(5, 7)}`;
+    date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
     time.textContent = weatherObj.time;
     cloud.textContent = `${weatherObj.cloud} %`;
     humidity.textContent = `${weatherObj.avgHumidity} %`;
