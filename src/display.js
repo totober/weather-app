@@ -1,6 +1,8 @@
+import { getData } from "."
 import {currentHourCard, fullDayCard, setCardData} from "./dom"
 
 export {triggerDataDisplay}
+
 
 function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr){
 
@@ -46,15 +48,22 @@ function displayHours(forecastArr, location){
     /* let aside = document.querySelector("aside") */
     let slider = document.querySelector(".slider")
 
-    slider.innerHTML = ""
+    slider.firstElementChild.innerHTML = ""
+    slider.lastElementChild.innerHTML = ""
 
     let [today, tomorrow, lastDay] = forecastArr
 
 
     let hours = today.hours
 
-   hours.forEach( hour => {
-        slider.appendChild(setCardData("aside", hour, location))
+   hours.forEach( (hour, i) => {
+        if(i < 12){
+            slider.firstElementChild.appendChild(setCardData("aside", hour, location))
+        } else if(i >= 12){
+
+            slider.lastElementChild.appendChild(setCardData("aside", hour, location))  
+        }
+       
    })
 }
 
@@ -104,8 +113,9 @@ function renderPrincipal(weather, location){
 function renderNear(forecastArr, historyArr, location){
 
     let near = document.querySelector(".near")
+    let nearArr = Array.from(near.children)
 
-    near.innerHTML = ""
+    nearArr.forEach(element => element.innerHTML = "")
 
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
@@ -114,10 +124,10 @@ function renderNear(forecastArr, historyArr, location){
     console.log("yesterday", yesterday)
 
 
-    near.appendChild(setCardData("near", yesterday.day, location))
-    near.appendChild(setCardData("near", today.day, location))
-    near.appendChild(setCardData("near", tomorrow.day, location))
-    near.appendChild(setCardData("near", lastDay.day, location))
+    nearArr[0].appendChild(setCardData("near", yesterday.day, location))
+    nearArr[1].appendChild(setCardData("near", today.day, location))
+    nearArr[2].appendChild(setCardData("near", tomorrow.day, location))
+    nearArr[3].appendChild(setCardData("near", lastDay.day, location))
 }
 
 

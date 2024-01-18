@@ -180,6 +180,18 @@ h4 {
     align-items: center;
 }
 
+.near :first-child, 
+.near :nth-child(2),
+.near :nth-child(3),
+.near :last-child {
+    height: 95%;
+    width: 25%;
+}
+
+.near :last-child .card.near {
+    border: none;
+}
+
 /* /// NEAR CARD /// */
 
 .card.near {
@@ -187,7 +199,7 @@ h4 {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
     min-height: 90%;
-    width: 25%;
+    width: 95%;
     /* border: 1px solid white; */
     justify-items: center;
     align-items: center;
@@ -197,16 +209,12 @@ h4 {
     border-right: 1px solid var(--white);
 }
 
-.near :last-child {
-    border: none;
-}
-
 .card.near img {
     width: 38%;
     filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
     grid-row: 2/3;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    /* margin-top: 15px;
+    margin-bottom: 15px; */
     align-self: center;
     justify-self: center; 
 }
@@ -217,8 +225,14 @@ h4 {
                                   TEXT ALING CENTER, PARA LOS SUB QUE SON MUY LARGOS.                          
      justify-self: center;*/   
     text-align: center; 
-    margin-bottom: 15px;  
+    margin-top: 15px;
+    /* margin-bottom: 15px; */  
     letter-spacing: 1.2px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
 
 }
 
@@ -349,59 +363,28 @@ aside {
     padding: 8px;
     margin-top: 33px;
     margin-bottom: 33px;
-    max-height: 90%;
+    max-height: 89%;
     overflow: hidden;
 }
-
-button {
-    position: absolute;   
-    /* left: 140px; */
-    right: 15%;
-    height: 40px;
-    width: 70px;
-    /* background-color: var(--black-btn); */
-    border-radius: 3px;
-    border: none;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
-    transition: ease-in-out 0.3s;
-}
-
-button.down {
-    bottom: -61%;
-    background-image: url(./img/angle-down-s.svg);
-    box-shadow: 1px -1px 1px var(--black-el);
-}
-
-button.up {
-    top: 1%;
-    background-image: url(./img/angle-up-s.svg);
-    box-shadow: 1px 1px 1px var(--black-el);
-}
-
-button:active {
-    transform: scale(0.96);
-    box-shadow: none;
-}
-
-/* .slide-container {
-    transition: 12s;
-} */
 
 .slider {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px;
-    transition: 0.5s;
+    transition: /* 1.8s */ 2.5s;
+    height: 95%;
 }
 
-.slider :first-child {
-    position: sticky;
-    bottom: 0px;
+.slider .container-1 {
+    height: 110%;
+    flex-shrink: 0;
+    margin-bottom: -25px;
+}
+
+.slider .container-2 {
+    height: 110%;
+    flex-shrink: 0;
 }
 
 .card.aside {
@@ -409,15 +392,17 @@ button:active {
     grid-template-columns: repeat(5, 1fr); */
     display: flex; 
     width: 90%;
-    min-height: 7%;
-    max-height: 10%;
-    border: 1px solid white;
+ /*    min-height: 7%;
+    max-height: 10%; */
+    height: 6.5%;
+/*     border: 1px solid white; */
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 5px 15px;
     column-gap: 2px;
+    border-bottom: solid 1px white;
+    margin-bottom: 1px;
 }
-
 
 .card.aside img {
     width: 12%;
@@ -435,7 +420,6 @@ button:active {
     text-align: center;
     justify-content: center;
 }
-
 
 .card.aside .time {
     /* grid-column: 1/2; */
@@ -455,6 +439,39 @@ button:active {
 .card.aside :not(img, .sub, .time, .temp) {
     display: none;
 } 
+
+button {
+    position: absolute;   
+    /* left: 140px; */
+    right: 15%;
+    height: 40px;
+    width: 70px;
+    /* background-color: var(--black-btn); */
+    border-radius: 3px;
+    border: none;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
+    transition: ease-in-out 0.3s;
+}
+
+button.down {
+    bottom: -41%;
+    background-image: url(./img/angle-down-s.svg);
+    box-shadow: 1px -1px 1px var(--black-el);
+}
+
+button.up {
+    top: 3px;
+    background-image: url(./img/angle-up-s.svg);
+    box-shadow: 1px 1px 1px var(--black-el);
+}
+
+button:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
 
 /*/// FOOTER ///*/
 

@@ -11,17 +11,17 @@ window.addEventListener("load", init)
 let input = document.querySelector("input")
 input.addEventListener("keydown", getInputValue)
 
-let near = document.querySelector(".near")
-near.addEventListener("click", nearCardsEvent)
+
 function nearCardsEvent(e) {
-    let nearArr = Array.from(this.children)
-    console.log(nearArr)
+    console.log(this)
 }
-
-
 
 function init() {
     getData("buenos aires")
+
+    let near = document.querySelector(".near")
+    let nearArr = Array.from(near.children)
+    nearArr.forEach(element => element.addEventListener("click", nearCardsEvent))
 }
 
 function getInputValue(e){
@@ -70,24 +70,15 @@ try{
 
    let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
 
-    //getStructuredForecast(forecastArr)
-    //getStructuredHistory(historyArr)
-    //getWeatherAndLocation(weatherAndLocation)
-
-    //getStructuredData([weatherAndLocation, forecastArr, historyArr])
-
-
-    /* let [currentWeather, location] = weatherAndLocation
-    let [today, tomorrow, lastDay] = forecastArr
-    let yesterday = historyArr */
-
-  /*   triggerDisplay(currentWeather, location, yesterday, today, tomorrow, lastDay) */
-  triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
+ 
+    triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
 
 } catch(err){
         console.log(err)
     }  
 } 
+
+
 
 
 /* function getStructuredData(array){

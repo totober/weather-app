@@ -1,4 +1,4 @@
-import {getData} from "./index"
+import {getData, getInputValue} from "./index"
 import {CurrentWeather, Day, Hour, Location} from "./class"
 
 /* export {test, getLocation, getCurrentWeather, getForecastData, getHistoryData} */
@@ -15,15 +15,12 @@ function triggerDataStructuration (dataForecast, dataHistory){
     let forecastArr = getForecastData(dataForecast)
     let historyArr = getHistoryData(dataHistory)
 
-    /* console.log(weatherAndLocation)
- 
-    console.log(historyArr) */
-
     console.log(forecastArr)
 
     return [weatherAndLocation, forecastArr, historyArr]
 
 }
+
 
 function getForecastData(obj) {
 

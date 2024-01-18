@@ -152,43 +152,51 @@ function iconSelector(obj){
     }
 
     return img
+} 
+
+let carousel = {
+    
+    val: 0,
+    
+    sliderUp(e) {
+
+        let value = 47
+    
+        if(carousel.val === 0 || elements.slider.firstElementChild.classList.contains("once")) {return}
+
+        elements.slider.firstElementChild.classList.add("once")
+        elements.slider.lastElementChild.classList.remove("once")
+
+        carousel.val += value
+        elements.slider.style.marginTop = `${carousel.val}rem`
+    },
+
+    sliderDown(e) {
+
+       let value = -47 
+
+        if(elements.slider.lastElementChild.classList.contains("once")) {return}
+
+        elements.slider.firstElementChild.classList.remove("once")
+        elements.slider.lastElementChild.classList.add("once")
+
+        carousel.val += value
+        elements.slider.style.marginTop = `${carousel.val}rem`
+
+    }
 }
 
-let btnUp = document.querySelector(".up")
-let btnDown = document.querySelector(".down")
-
-btnUp.addEventListener("click", slider)
-btnDown.addEventListener("click", slider)
-
-let val = 0
-function slider(e){
-
-let slider = document.querySelector(".slider")
-let sliderArr = Array.from(slider.children)
 
 
-console.log("VALUE: ", val)
-let value = this.classList.contains("up") ? -8 : 8; 
+let elements = {
+    btnUp: document.querySelector(".up")
+    .addEventListener("click", carousel.sliderUp),
 
-      if(val <= (-96) ||  val>= 96 ){return}
+    btnDown: document.querySelector(".down")
+    .addEventListener("click", carousel.sliderDown),
 
-
-        for (let i = 0; i <= 3; i++){
-
-            val += value
-            slider.style.marginTop = `${val}rem`
-            console.log(val)
-            
-            if(val <= (-96) ||  val>= 96 ){break}
-        }
-       
-        }
-       
-    
-
-
-
-
+    slider: document.querySelector(".slider")
+}
        
      
 
