@@ -17,7 +17,7 @@ body {
         "main aside"
         "footer footer";
     gap: 10px;
-    background-image: linear-gradient(to left, #000000, #2D3436);
+    background-image: /* linear-gradient(to left, #000000, #2D3436); */ linear-gradient(to left, #e80505, #7e0303);
     color: #EDEADE; /* color name: alabaster */
     padding: 8px;
     height: 700px;
@@ -102,7 +102,7 @@ h4 {
     grid-template-rows: repeat(4, 1fr);
     width: 90%;
     /* SI NO ESPECIFICO ALGUNA ALTURA, NO FUNCIONA NADA BIEN */
-    min-height: 80%;
+    height: 80%;
 /*     border: 1px solid white; */
 
 }
@@ -198,7 +198,7 @@ h4 {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 1fr);
-    min-height: 90%;
+    height: 90%;
     width: 95%;
     /* border: 1px solid white; */
     justify-items: center;
@@ -272,7 +272,7 @@ h4 {
     grid-template-rows: repeat(2, 1fr);
     justify-items: center;
     align-items: center;
-    min-height: 90%;
+    height: 90%;
 }
 
 .card.extra .temp {
@@ -457,7 +457,7 @@ button {
 }
 
 button.down {
-    bottom: -41%;
+    bottom: -47%;
     background-image: url(./img/angle-down-s.svg);
     box-shadow: 1px -1px 1px var(--black-el);
 }

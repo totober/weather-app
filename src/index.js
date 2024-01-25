@@ -11,6 +11,10 @@ window.addEventListener("load", init)
 let input = document.querySelector("input")
 input.addEventListener("keydown", getInputValue)
 
+let lab = document.documentElement
+console.log(lab)
+lab.style.setProperty("--black-bg", "red")
+
 
 function nearCardsEvent(e) {
     console.log(this)
@@ -50,7 +54,7 @@ async function getData(inputVal){
 try{
     let [response, response2] = await Promise.all([
         fetch(`http://api.weatherapi.com/v1/forecast.json?key=6401a6548a224689902171841233012&q=${inputVal}&days=3`),
-        fetch(`http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=${inputVal}&dt=2024-01-14`)
+        fetch(`http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=${inputVal}&dt=2024-01-24`)
     ])
 
     let [dataForecast, dataHistory] = await Promise.all([
