@@ -58,10 +58,10 @@ function displayHours(forecastArr, location){
 
    hours.forEach( (hour, i) => {
         if(i < 12){
-            slider.firstElementChild.appendChild(setCardData("aside", hour, location))
+            slider.firstElementChild.appendChild(setCardData("card-aside", hour, location))
         } else if(i >= 12){
 
-            slider.lastElementChild.appendChild(setCardData("aside", hour, location))  
+            slider.lastElementChild.appendChild(setCardData("card-aside", hour, location))  
         }
        
    })
@@ -85,7 +85,7 @@ function renderPrincipal(weather, location){
     let principal = document.querySelector(".principal")
     principal.innerHTML = ""
 
-    principal.appendChild(setCardData("principal", weather, location))
+    principal.appendChild(setCardData("card-principal", weather, location))
 
 }
 
@@ -124,10 +124,10 @@ function renderNear(forecastArr, historyArr, location){
     console.log("yesterday", yesterday)
 
 
-    nearArr[0].appendChild(setCardData("near", yesterday.day, location))
-    nearArr[1].appendChild(setCardData("near", today.day, location))
-    nearArr[2].appendChild(setCardData("near", tomorrow.day, location))
-    nearArr[3].appendChild(setCardData("near", lastDay.day, location))
+    nearArr[0].appendChild(setCardData("card-near", yesterday.day, location))
+    nearArr[1].appendChild(setCardData("card-near", today.day, location))
+    nearArr[2].appendChild(setCardData("card-near", tomorrow.day, location))
+    nearArr[3].appendChild(setCardData("card-near", lastDay.day, location))
 }
 
 
@@ -140,7 +140,7 @@ function renderExtra(forecastArr, location){
     let extra = document.querySelector(".extra")
     extra.innerHTML = "";
 
-    extra.appendChild(setCardData("extra", today.day, location));
+    extra.appendChild(setCardData("card-extra", today.day, location));
 
 }
 

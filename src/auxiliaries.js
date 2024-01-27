@@ -69,11 +69,15 @@ let iconsObj = {
 
 function iconSelector(obj){
 
-    let weather = obj.weatherText;
+    console.log(obj)
+    console.log(obj.weatherText)
+    let weather = obj.weatherText.toLowerCase().trim()
     let isDay = obj.isDay 
+    console.log(isDay)
 
     /// TERNARY OPERATOR ///
     let nightOrDay = isDay ? iconsObj.dayArr() : iconsObj.nightArr();
+    console.log(nightOrDay)
 
     let img = ""
 
@@ -144,7 +148,8 @@ function iconSelector(obj){
         if(img !== ""){ break }
 
         for (const element of arr ) {
-            if(weather === element) {
+
+            if(weather === element.toLowerCase()) {
                 img = arr[arr.length -1]
                 break
             }
@@ -153,6 +158,23 @@ function iconSelector(obj){
 
     return img
 } 
+
+function easyCar(e) {
+
+    console.log(e)
+    
+    let event = e.target.classList.contains("up") ? "up" : "down"
+
+    if(event === "up") {
+       elements.slider.firstElementChild.classList.add("show")
+       elements.slider.lastElementChild.classList.remove("show")  
+    } else if (event === "down") {
+        elements.slider.firstElementChild.classList.remove("show")
+        elements.slider.lastElementChild.classList.add("show")
+    }
+    
+   
+}
 
 let carousel = {
     
@@ -190,10 +212,10 @@ let carousel = {
 
 let elements = {
     btnUp: document.querySelector(".up")
-    .addEventListener("click", carousel.sliderUp),
+    .addEventListener("click", /* carousel.sliderUp */easyCar),
 
     btnDown: document.querySelector(".down")
-    .addEventListener("click", carousel.sliderDown),
+    .addEventListener("click", /* carousel.sliderDown */easyCar),
 
     slider: document.querySelector(".slider")
 }
