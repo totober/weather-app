@@ -519,10 +519,10 @@ aside {
 } 
 
 button {
-    position: absolute;
+    /* position: absolute; */
     /* left: 140px; */
     /* right: 15%; */
-    right: 40%;
+    /* right: 40%; */
     height: 40px;
     width: 70px;
     /* background-color: var(--black-btn); */
@@ -538,14 +538,15 @@ button {
 }
 
 button.down {
-    bottom: 0;
+    justify-self: center;
+    align-self: end;
     background-image: url(./img/angle-down-s.svg);
     box-shadow: 1px -1px 1px var(--black-el);
     grid-area: down;
 }
 
 button.up {
-    top: 0;
+    justify-self: center;
     background-image: url(./img/angle-up-s.svg);
     box-shadow: 1px 1px 1px var(--black-el);
     grid-area: up;

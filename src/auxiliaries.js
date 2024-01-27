@@ -161,8 +161,6 @@ function iconSelector(obj){
 
 function easyCar(e) {
 
-    console.log(e)
-    
     let event = e.target.classList.contains("up") ? "up" : "down"
 
     if(event === "up") {
@@ -171,12 +169,10 @@ function easyCar(e) {
     } else if (event === "down") {
         elements.slider.firstElementChild.classList.remove("show")
         elements.slider.lastElementChild.classList.add("show")
-    }
-    
-   
+    } 
 }
 
-let carousel = {
+/* let carousel = {
     
     val: 0,
     
@@ -206,7 +202,7 @@ let carousel = {
         elements.slider.style.marginTop = `${carousel.val}rem`
 
     }
-}
+} */
 
 
 
