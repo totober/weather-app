@@ -44,10 +44,10 @@ let iconsObj = {
     moon: ["Clear", moonImg],
 
     rainDay: ["Patchy rain possible", "Patchy light rain", "Moderate rain at times", "Heavy rain at times", 
-                "Light rain shower", rainDayImg],
+                "Light rain shower", "Patchy rain nearby", rainDayImg],
 
     rainNight: ["Patchy rain possible", "Patchy light rain", "Moderate rain at times", "Heavy rain at times", 
-                "Light rain shower", rainNightImg],
+                "Light rain shower", "Patchy rain nearby", rainNightImg],
 
     cloudyDay: ["Partly cloudy", cloudyDayImg],
 
@@ -69,15 +69,12 @@ let iconsObj = {
 
 function iconSelector(obj){
 
-    console.log(obj)
-    console.log(obj.weatherText)
     let weather = obj.weatherText.toLowerCase().trim()
     let isDay = obj.isDay 
     console.log(isDay)
 
     /// TERNARY OPERATOR ///
     let nightOrDay = isDay ? iconsObj.dayArr() : iconsObj.nightArr();
-    console.log(nightOrDay)
 
     let img = ""
 
