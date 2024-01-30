@@ -12,6 +12,7 @@ let input = document.querySelector("input")
 input.addEventListener("keydown", getInputValue)
 
 
+
 function nearCardsEvent(e) {
     console.log(this)
 }
@@ -78,7 +79,21 @@ try{
     }  
 } 
 
+let nav = document.querySelector("nav")
+let btnMenu = document.querySelector(".menu")
 
+btnMenu.addEventListener("click", (e) => {
+
+    btnMenu.nextElementSibling.classList.toggle("show-menu")
+console.log(e)
+})
+
+window.addEventListener("click", (e) => {
+
+    if(!nav.contains(e.target)){
+        btnMenu.nextElementSibling.classList.remove("show-menu")
+    }
+})
 
 
 /* function getStructuredData(array){

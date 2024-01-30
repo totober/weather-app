@@ -44,10 +44,10 @@ let iconsObj = {
     moon: ["Clear", moonImg],
 
     rainDay: ["Patchy rain possible", "Patchy light rain", "Moderate rain at times", "Heavy rain at times", 
-                "Light rain shower", rainDayImg],
+                "Light rain shower", "Patchy rain nearby", rainDayImg],
 
     rainNight: ["Patchy rain possible", "Patchy light rain", "Moderate rain at times", "Heavy rain at times", 
-                "Light rain shower", rainNightImg],
+                "Light rain shower", "Patchy rain nearby", rainNightImg],
 
     cloudyDay: ["Partly cloudy", cloudyDayImg],
 
@@ -69,8 +69,9 @@ let iconsObj = {
 
 function iconSelector(obj){
 
-    let weather = obj.weatherText;
+    let weather = obj.weatherText.toLowerCase().trim()
     let isDay = obj.isDay 
+    console.log(isDay)
 
     /// TERNARY OPERATOR ///
     let nightOrDay = isDay ? iconsObj.dayArr() : iconsObj.nightArr();
@@ -144,7 +145,8 @@ function iconSelector(obj){
         if(img !== ""){ break }
 
         for (const element of arr ) {
-            if(weather === element) {
+
+            if(weather === element.toLowerCase()) {
                 img = arr[arr.length -1]
                 break
             }
@@ -154,7 +156,20 @@ function iconSelector(obj){
     return img
 } 
 
-let carousel = {
+function easyCar(e) {
+
+    let event = e.target.classList.contains("up") ? "up" : "down"
+
+    if(event === "up") {
+       elements.slider.firstElementChild.classList.add("show")
+       elements.slider.lastElementChild.classList.remove("show")  
+    } else if (event === "down") {
+        elements.slider.firstElementChild.classList.remove("show")
+        elements.slider.lastElementChild.classList.add("show")
+    } 
+}
+
+/* let carousel = {
     
     val: 0,
     
@@ -184,16 +199,16 @@ let carousel = {
         elements.slider.style.marginTop = `${carousel.val}rem`
 
     }
-}
+} */
 
 
 
 let elements = {
     btnUp: document.querySelector(".up")
-    .addEventListener("click", carousel.sliderUp),
+    .addEventListener("click", /* carousel.sliderUp */easyCar),
 
     btnDown: document.querySelector(".down")
-    .addEventListener("click", carousel.sliderDown),
+    .addEventListener("click", /* carousel.sliderDown */easyCar),
 
     slider: document.querySelector(".slider")
 }
