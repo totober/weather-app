@@ -81,28 +81,19 @@ try{
 
 let nav = document.querySelector("nav")
 let btnMenu = document.querySelector(".menu")
+
 btnMenu.addEventListener("click", (e) => {
-    btnMenu.nextElementSibling.classList.toggle("show-menu")
 
- console.log(e.target.nodeName)
- console.log(e.target.parentElement)
- console.log(e.target.parentElement.nodeName)
-
- if(!e.target.parentElement || !e.target.parentElement.children) {
     btnMenu.nextElementSibling.classList.toggle("show-menu")
-    console.log("no creo que funcione che")
- }
+console.log(e)
 })
 
 window.addEventListener("click", (e) => {
 
-    /* if(!btnMenu.nextElementSibling.classList.contains("show-menu"))  */
-
     if(!nav.contains(e.target)){
-        console.log("todos topus")
         btnMenu.nextElementSibling.classList.remove("show-menu")
     }
-}/* , {once: true} */)
+})
 
 
 /* function getStructuredData(array){
