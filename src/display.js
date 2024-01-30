@@ -4,57 +4,52 @@ import {currentHourCard, fullDayCard, setCardData} from "./dom"
 export {triggerDataDisplay}
 
 
-function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr){
+function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day = "today"){
 
     let [currentWeather, location] = weatherAndLocation
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
-   // displayCurrentCard(currentWeather, location)
     renderPrincipal(currentWeather, location)
-
-/*     displayHistoryAndForecast(yesterday)
-    displayHistoryAndForecast(today)
-    displayHistoryAndForecast(tomorrow)
-    displayHistoryAndForecast(lastDay) */
 
     renderNear(forecastArr, historyArr, location)
 
-    displayHours(forecastArr, location)
+    displayHours(/* forecastArr */today, location)
 
-    renderExtra(forecastArr, location)
+    renderExtra(/* forecastArr */today, location)
+
+
+   let chosenDay = ""
+
+   switch(true) {
+        case day === "yesterday":
+            chosenDay = yesterday
+            break;
+        case day === "tomorrow":
+            chosenDay = tomorrow
+            break;
+        case day === "lastDay":
+            chosenDay = lastDay
+            break;
+   }
+
+   if(day !== "today") {
+        renderPrincipal(chosenDay.day, location)
+        displayHours(chosenDay, location)
+        renderExtra(chosenDay, location)
+    }
 }
 
+function displayHours(/* forecastArr */forecast, location){
 
-/* function displayCurrentCard(currentWeather, location) {
-
-    let principal = document.querySelector(".principal")
-
-    principal.appendChild(currentHourCard("principal", currentWeather, location))
-
-}
-
-function displayHistoryAndForecast(historyOrForecast){
-
-    let near = document.querySelector(".near")
-
-    near.innerHTML = ""
-
-    near.appendChild(fullDayCard("near", historyOrForecast))
-} */
-
-function displayHours(forecastArr, location){
-
-    /* let aside = document.querySelector("aside") */
     let slider = document.querySelector(".slider")
 
     slider.firstElementChild.innerHTML = ""
     slider.lastElementChild.innerHTML = ""
 
-    let [today, tomorrow, lastDay] = forecastArr
+   // let [today, tomorrow, lastDay] = forecastArr
 
-
-    let hours = today.hours
+    let hours = forecast.hours
 
    hours.forEach( (hour, i) => {
         if(i < 12){
@@ -67,20 +62,7 @@ function displayHours(forecastArr, location){
    })
 }
 
-// A VER LA NUEVA
-
-/* function renderPrincipal(currentWeather, location){
-    console.log("a ver como funca")
-    
-    let principal = document.querySelector(".principal")
-    principal.innerHTML = ""
-
-    principal.appendChild(currentHourCard("principal", currentWeather, location))
-
-} */
-
 function renderPrincipal(weather, location){
-    console.log("a ver como funca")
     
     let principal = document.querySelector(".principal")
     principal.innerHTML = ""
@@ -88,27 +70,6 @@ function renderPrincipal(weather, location){
     principal.appendChild(setCardData("card-principal", weather, location))
 
 }
-
-
-
-// A VER LA NUEVA
-
-
-/* function renderNear(forecastArr, historyArr){
-    console.log("near cheee")
-
-    let near = document.querySelector(".near")
-
-    near.innerHTML = ""
-
-    let [today, tomorrow, lastDay] = forecastArr
-    let yesterday = historyArr
-
-    near.appendChild(fullDayCard("near", yesterday))
-    near.appendChild(fullDayCard("near", today))
-    near.appendChild(fullDayCard("near", tomorrow))
-    near.appendChild(fullDayCard("near", lastDay))
-} */
 
 function renderNear(forecastArr, historyArr, location){
 
@@ -120,9 +81,6 @@ function renderNear(forecastArr, historyArr, location){
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
-    console.log("today", today)
-    console.log("yesterday", yesterday)
-
 
     nearArr[0].appendChild(setCardData("card-near", yesterday.day, location))
     nearArr[1].appendChild(setCardData("card-near", today.day, location))
@@ -133,21 +91,15 @@ function renderNear(forecastArr, historyArr, location){
 
 
 
-function renderExtra(forecastArr, location){
+function renderExtra(/* forecastArr */ forecast, location){
 
-    let [today, tomorrow, lastDay] = forecastArr
+    //let [today, tomorrow, lastDay] = forecastArr
+
+    let extraData = forecast.day
 
     let extra = document.querySelector(".extra")
     extra.innerHTML = "";
 
-    extra.appendChild(setCardData("card-extra", today.day, location));
+    extra.appendChild(setCardData("card-extra", /* today.day */extraData, location));
 
 }
-
-/* function eventDisplayListener(e){
-
-    let target = e.target
-
-
-
-} */

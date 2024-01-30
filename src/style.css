@@ -518,7 +518,7 @@ aside {
     /* animation: show; */
 }
 
-@keyframes up-to-down {
+@keyframes down-to-up {
     0% {
         transform: translateY(-100%);
     }
@@ -528,7 +528,7 @@ aside {
     }
 }
 
-@keyframes down-to-up {
+@keyframes up-to-down {
     0% {
         /* opacity: 0; */
         transform: translateY(200%);

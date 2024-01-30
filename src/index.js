@@ -13,12 +13,15 @@ input.addEventListener("keydown", getInputValue)
 
 
 
-function nearCardsEvent(e) {
+function nearCardsEvent() {
     console.log(this)
+    console.log(this.className)
+    return this.className
 }
 
 function init() {
     getData("buenos aires")
+    //mainFunction("buenos aires")
 
     let near = document.querySelector(".near")
     let nearArr = Array.from(near.children)
@@ -29,12 +32,12 @@ function getInputValue(e){
 
     if(e.key !== "Enter") {return}
 
-
-    let inputVal = input.value
+    let inputVal = input.value 
 
     getData(inputVal)
-    
 
+    //mainFunction(inputVal)
+    
 }
 
 let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
@@ -47,12 +50,15 @@ let place = "q=Paris"
 
 async function getData(inputVal){
 
-    console.log(inputVal)
 try{
     let [response, response2] = await Promise.all([
         fetch(`http://api.weatherapi.com/v1/forecast.json?key=6401a6548a224689902171841233012&q=${inputVal}&days=3`),
         fetch(`http://api.weatherapi.com/v1/history.json?key=6401a6548a224689902171841233012&q=${inputVal}&dt=2024-01-24`)
     ])
+
+    if(!response.ok || !response2.ok){
+        throw new Error("bad request")
+    }
 
     let [dataForecast, dataHistory] = await Promise.all([
         response.json(),
@@ -69,13 +75,18 @@ try{
     let forecastArr = getForecastData(dataForecast)
     let historyArr = getHistoryData(dataHistory) */
 
-   let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
+    ///ACAAAAAA///
+    //let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory) 
 
  
-    triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
+     //triggerDataDisplay(weatherAndLocation, forecastArr, historyArr) 
+
+   //return [dataForecast, dataHistory]
+   dataHandler(dataForecast, dataHistory)
 
 } catch(err){
-        console.log(err)
+    console.log(err)
+
     }  
 } 
 
@@ -94,6 +105,59 @@ window.addEventListener("click", (e) => {
         btnMenu.nextElementSibling.classList.remove("show-menu")
     }
 })
+
+/* async function mainFunction (inputVal) {
+
+    try{
+        let [dataForecast, dataHistory] = await getData(inputVal)
+
+        console.log("ave", dataForecast)
+        console.log("ave", dataHistory)
+
+
+       let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
+
+
+
+        triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
+
+     }
+    catch(err) {
+        console.log(err)
+    }
+   
+
+} */
+
+
+async function dataHandler(dataForecast, dataHistory){
+
+    let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
+
+    triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
+
+
+    //if()
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* function getStructuredData(array){
