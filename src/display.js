@@ -1,4 +1,4 @@
-import {setCardData} from "./dom"
+import {setCardData, setPrincipalData} from "./dom"
 
 export {triggerDataDisplay}
 
@@ -10,7 +10,7 @@ function triggerDataDisplay(/* weatherAndLocation */ location, forecastArr, hist
     let yesterday = historyArr
 
     // today and current are the default values //
-    renderPrincipal(/* currentWeather */ today.current, location)
+    renderPrincipal(/* currentWeather */ today, location)
     renderNear(forecastArr, historyArr, location)
     renderHours(today, location)
     renderExtra(today, location)
@@ -64,7 +64,8 @@ function renderPrincipal(weather, location){
     let principalContainer = document.querySelector(".principal")
     principalContainer.innerHTML = ""
 
-    principalContainer.appendChild(setCardData("card-principal", weather, location))
+    //principalContainer.appendChild(setCardData("card-principal", weather, location))
+    principalContainer.appendChild(setPrincipalData("card-principal", weather, location))
 }
 
 

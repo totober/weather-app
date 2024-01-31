@@ -1,6 +1,6 @@
 import { iconSelector } from "./auxiliaries"
 
-export {setCardData}
+export {setCardData, setPrincipalData}
 
 
 function createElement(element, className) {
@@ -15,10 +15,11 @@ function createCard(){
     let card = createElement("article", "card")
     
     let place = createElement("p", "place")
+    let date = createElement("p", "date")
+    let wrapper = createElement("div", "wrapper")
     let temp = createElement("p", "temp")
     let tempFeel = createElement("p", "tempFeel")
     let tempMinMax = createElement("p", "tempMinMax")
-    let date = createElement("p", "date")
     let cloud = createElement("p", "cloud")
     let precip = createElement("p", "precip")
     let humidity = createElement("p", "humidity")
@@ -31,10 +32,9 @@ function createCard(){
     let sub = createElement("p", "sub")
 
    let cardArr = [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
-                  humidity, snow, wind, uv]
+                  humidity, snow, wind, uv, wrapper]
 
    cardArr.forEach(element => {card.appendChild(element)})
-
 
     return {card, cardArr}
 }
@@ -84,18 +84,36 @@ function setPrincipalData(className, weatherObj, locationObj) {
     card.classList.add(className)
 
     let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
-        humidity, snow, wind, uv] = cardArr
+        humidity, snow, wind, uv, wrapper] = cardArr
 
-    img.src = iconSelector(weatherObj);
+    let weather = "";
+    if (weatherObj.hasOwnProperty("current")) {
+        console.log("asi es")
+       weather = weatherObj.current
+    } else {
+        weather = weatherObj
+    }
+
+    img.src = iconSelector(weather);
     sub.textContent = weatherObj.weatherText;
     place.textContent = `${locationObj.name}, ${locationObj.country}`; 
 
 
     temp.textContent = 
-    weatherObj.isCelsius ? `${Number.parseInt(weatherObj.tempC)}º`
-                         : `${Number.parseInt(weatherObj.tempF)}º`;
+    weather.isCelsius ? `${Number.parseInt(weather.tempC)}º`
+                         : `${Number.parseInt(weather.tempF)}º`;
 
-    date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
+                        
+    date.textContent = `${weather.date.slice(8)}/${weather.date.slice(5, 7)}`;
+
+    console.log(weatherObj)
+    if (weatherObj.hasOwnProperty("current")) {
+        console.log("topus")
+        date.textContent = "Today, currently";
+    }
+
+    wrapper.appendChild(place)
+    wrapper.appendChild(date)
     
     return card
 }
