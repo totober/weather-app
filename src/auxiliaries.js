@@ -65,8 +65,6 @@ let iconsObj = {
 }
 
 
-
-
 function iconSelector(obj){
 
     let weather = obj.weatherText.toLowerCase().trim()
@@ -168,39 +166,6 @@ function easyCar(e) {
     } 
 }
 
-/* let carousel = {
-    
-    val: 0,
-    
-    sliderUp(e) {
-
-        let value = 47
-    
-        if(carousel.val === 0 || elements.slider.firstElementChild.classList.contains("once")) {return}
-
-        elements.slider.firstElementChild.classList.add("once")
-        elements.slider.lastElementChild.classList.remove("once")
-
-        carousel.val += value
-        elements.slider.style.marginTop = `${carousel.val}rem`
-    },
-
-    sliderDown(e) {
-
-       let value = -47 
-
-        if(elements.slider.lastElementChild.classList.contains("once")) {return}
-
-        elements.slider.firstElementChild.classList.remove("once")
-        elements.slider.lastElementChild.classList.add("once")
-
-        carousel.val += value
-        elements.slider.style.marginTop = `${carousel.val}rem`
-
-    }
-} */
-
-
 
 let elements = {
     btnUp: document.querySelector(".up")
@@ -213,13 +178,6 @@ let elements = {
 }
        
      
-
-        
-        
-
-
-
-
 
 
 
@@ -272,3 +230,40 @@ function compareObjects (data, data2, data3){
 
     console.log("idem:", idem)
 }
+
+
+
+
+
+
+/* let carousel = {
+    
+    val: 0,
+    
+    sliderUp(e) {
+
+        let value = 47
+    
+        if(carousel.val === 0 || elements.slider.firstElementChild.classList.contains("once")) {return}
+
+        elements.slider.firstElementChild.classList.add("once")
+        elements.slider.lastElementChild.classList.remove("once")
+
+        carousel.val += value
+        elements.slider.style.marginTop = `${carousel.val}rem`
+    },
+
+    sliderDown(e) {
+
+       let value = -47 
+
+        if(elements.slider.lastElementChild.classList.contains("once")) {return}
+
+        elements.slider.firstElementChild.classList.remove("once")
+        elements.slider.lastElementChild.classList.add("once")
+
+        carousel.val += value
+        elements.slider.style.marginTop = `${carousel.val}rem`
+
+    }
+} */

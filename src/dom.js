@@ -38,6 +38,44 @@ function createCard(){
 }
 
 
+function setCardData(className, weatherObj, locationObj) {
+
+    let {card, cardArr} = createCard()
+    card.classList.add(className)
+
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv] = cardArr
+
+    img.src = iconSelector(weatherObj);
+    sub.textContent = weatherObj.weatherText;
+    place.textContent = `${locationObj.name}, ${locationObj.country}`; 
+    date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
+    time.textContent = weatherObj.time;
+    cloud.textContent = `${weatherObj.cloud} %`;
+    humidity.textContent = `${weatherObj.avgHumidity} %`;
+    wind.textContent = `${Number.parseInt(weatherObj.wind)} km`;
+    uv.textContent = weatherObj.uv;
+
+    temp.textContent = `${Number.parseInt(weatherObj.tempC)}º`;
+    tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempC_feel)}º`
+    tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempC)}º/${Number.parseInt(weatherObj.minTempC)}º`;
+    if(!weatherObj.isCelsius){ 
+        temp.textContent = `${Number.parseInt(weatherObj.tempF)}º`;
+        tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempF_feel)}º`;
+        tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempF)}º/${Number.parseInt(weatherObj.minTempF)}º`;
+    } 
+
+    precip.textContent = `${Number.parseInt(weatherObj.precipChance)} %`;
+    snow.textContent = `${weatherObj.snowChance} %`;
+    if(weatherObj.isHistory){ 
+        precip.textContent = `${Number.parseInt(weatherObj.precipTotal)} mm`;
+        snow.textContent = `${Number.parseInt(weatherObj.snowTotal)} mm`
+    };
+
+    return card
+}
+
+
+
 /* function currentHourCard(className, weather, location){
 
     let {card, cardArr} = createCard()
@@ -102,42 +140,5 @@ function fullDayCard(className, weather, location){
 
     return card
 } */
-
-
-function setCardData(className, weatherObj, locationObj) {
-
-    let {card, cardArr} = createCard()
-    card.classList.add(className)
-
-    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv] = cardArr
-
-    img.src = iconSelector(weatherObj);
-    sub.textContent = weatherObj.weatherText;
-    place.textContent = `${locationObj.name}, ${locationObj.country}`; 
-    date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
-    time.textContent = weatherObj.time;
-    cloud.textContent = `${weatherObj.cloud} %`;
-    humidity.textContent = `${weatherObj.avgHumidity} %`;
-    wind.textContent = `${Number.parseInt(weatherObj.wind)} km`;
-    uv.textContent = weatherObj.uv;
-
-    temp.textContent = `${Number.parseInt(weatherObj.tempC)}º`;
-    tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempC_feel)}º`
-    tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempC)}º/${Number.parseInt(weatherObj.minTempC)}º`;
-    if(!weatherObj.isCelsius){ 
-        temp.textContent = `${Number.parseInt(weatherObj.tempF)}º`;
-        tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempF_feel)}º`;
-        tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempF)}º/${Number.parseInt(weatherObj.minTempF)}º`;
-    } 
-
-    precip.textContent = `${Number.parseInt(weatherObj.precipChance)} %`;
-    snow.textContent = `${weatherObj.snowChance} %`;
-    if(weatherObj.isHistory){ 
-        precip.textContent = `${Number.parseInt(weatherObj.precipTotal)} mm`;
-        snow.textContent = `${Number.parseInt(weatherObj.snowTotal)} mm`
-    };
-
-    return card
-}
 
 

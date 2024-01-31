@@ -1,13 +1,8 @@
-import {getData, getInputValue} from "./index"
 import {CurrentWeather, Day, Hour, Location} from "./class"
 
-/* export {test, getLocation, getCurrentWeather, getForecastData, getHistoryData} */
 export {triggerDataStructuration}
 
-let test = {
-    history: "last 7 days",
-    forecast: "up to 3 days "
-}
+
 
 function triggerDataStructuration (dataForecast, dataHistory){
 
@@ -25,32 +20,22 @@ function triggerDataStructuration (dataForecast, dataHistory){
 function getForecastData(obj) {
 
     let rawForecastArr = obj.forecast.forecastday;
-    let rawLocation = obj.location
 
     let [rawTodayArr, rawTomorrowArr, rawLastDayArr] = rawForecastArr;
 
- /*    let todayDate = rawTodayArr.date;
-    let todayDay = new Day(rawTodayArr.day);
-    let todayHoursArr = getHours(rawTodayArr);
-    let todayArr = [todayDate, todayDay, todayHoursArr]; */
-
     let todayDay = new Day(rawTodayArr.day, rawTodayArr.date);
     let todayHoursArr = getHours(rawTodayArr);
-    let todayArr = {day: todayDay, hours: todayHoursArr};
+    let todayObj = {day: todayDay, hours: todayHoursArr};
 
-/*     let tomorrowDate = rawTomorrowArr.date;
-    let tomorrowDay = new Day(rawTomorrowArr.day);
-    let tomorrowHoursArr = getHours(rawTomorrowArr);
-    let tomorrowArr = [tomorrowDate, tomorrowDay, tomorrowHoursArr]; */
     let tomorrowDay = new Day(rawTomorrowArr.day, rawTomorrowArr.date);
     let tomorrowHoursArr = getHours(rawTomorrowArr);
-    let tomorrowArr = {day: tomorrowDay, hours: tomorrowHoursArr};
+    let tomorrowObj = {day: tomorrowDay, hours: tomorrowHoursArr};
 
     let lastDayDay = new Day(rawLastDayArr.day, rawLastDayArr.date);
     let lastDayHoursArr = getHours(rawLastDayArr);
-    let lastDayArr = {day: lastDayDay, hours: lastDayHoursArr};
+    let lastDayObj = {day: lastDayDay, hours: lastDayHoursArr};
 
-    let forecastArr = [todayArr, tomorrowArr, lastDayArr];
+    let forecastArr = [todayObj, tomorrowObj, lastDayObj];
 
     return forecastArr
 }
@@ -63,9 +48,9 @@ function getHistoryData(obj) {
     yesterdayDay.isHistory = true;
     let yesterdayHoursArr = getHours(rawYesterdayArr)
 
-    let yesterdayArr = {day: yesterdayDay, hours: yesterdayHoursArr}
+    let yesterdayObj = {day: yesterdayDay, hours: yesterdayHoursArr}
 
-    return yesterdayArr
+    return yesterdayObj
 }
 
 function getLocation(obj) {

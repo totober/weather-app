@@ -54,7 +54,6 @@ class Day {
 
 class Location {
     constructor(obj){
-        //this.localTime = obj.localtime,
         this.name = obj.name,
         this.country = obj.country,
         this.region = obj.region

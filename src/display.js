@@ -1,5 +1,4 @@
-import { getData } from "."
-import {currentHourCard, fullDayCard, setCardData} from "./dom"
+import {setCardData} from "./dom"
 
 export {triggerDataDisplay}
 
@@ -10,14 +9,11 @@ function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day = "
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
+    // today and current are the default values //
     renderPrincipal(currentWeather, location)
-
     renderNear(forecastArr, historyArr, location)
-
-    displayHours(/* forecastArr */today, location)
-
-    renderExtra(/* forecastArr */today, location)
-
+    renderHours(today, location)
+    renderExtra(today, location)
 
    let chosenDay = ""
 
@@ -35,46 +31,48 @@ function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day = "
 
    if(day !== "today") {
         renderPrincipal(chosenDay.day, location)
-        displayHours(chosenDay, location)
+        renderHours(chosenDay, location)
         renderExtra(chosenDay, location)
     }
 }
 
-function displayHours(/* forecastArr */forecast, location){
 
-    let slider = document.querySelector(".slider")
 
-    slider.firstElementChild.innerHTML = ""
-    slider.lastElementChild.innerHTML = ""
+function renderHours(forecast, location){
 
-   // let [today, tomorrow, lastDay] = forecastArr
+    let sliderContainer = document.querySelector(".slider")
+
+    sliderContainer.firstElementChild.innerHTML = ""
+    sliderContainer.lastElementChild.innerHTML = ""
 
     let hours = forecast.hours
 
-   hours.forEach( (hour, i) => {
+    hours.forEach( (hour, i) => {
         if(i < 12){
-            slider.firstElementChild.appendChild(setCardData("card-aside", hour, location))
+            sliderContainer.firstElementChild.appendChild(setCardData("card-aside", hour, location))
         } else if(i >= 12){
 
-            slider.lastElementChild.appendChild(setCardData("card-aside", hour, location))  
-        }
-       
+            sliderContainer.lastElementChild.appendChild(setCardData("card-aside", hour, location))  
+        }    
    })
 }
 
+
+
 function renderPrincipal(weather, location){
     
-    let principal = document.querySelector(".principal")
-    principal.innerHTML = ""
+    let principalContainer = document.querySelector(".principal")
+    principalContainer.innerHTML = ""
 
-    principal.appendChild(setCardData("card-principal", weather, location))
-
+    principalContainer.appendChild(setCardData("card-principal", weather, location))
 }
+
+
 
 function renderNear(forecastArr, historyArr, location){
 
-    let near = document.querySelector(".near")
-    let nearArr = Array.from(near.children)
+    let nearContainer = document.querySelector(".near")
+    let nearArr = Array.from(nearContainer.children)
 
     nearArr.forEach(element => element.innerHTML = "")
 
@@ -89,17 +87,12 @@ function renderNear(forecastArr, historyArr, location){
 }
 
 
-
-
-function renderExtra(/* forecastArr */ forecast, location){
-
-    //let [today, tomorrow, lastDay] = forecastArr
+function renderExtra(forecast, location){
 
     let extraData = forecast.day
 
-    let extra = document.querySelector(".extra")
-    extra.innerHTML = "";
+    let extraContainer = document.querySelector(".extra")
+    extraContainer.innerHTML = "";
 
-    extra.appendChild(setCardData("card-extra", /* today.day */extraData, location));
-
+    extraContainer.appendChild(setCardData("card-extra", extraData, location));
 }
