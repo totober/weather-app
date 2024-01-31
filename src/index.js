@@ -30,7 +30,12 @@ function closeMenu(e) {
 function nearCardsEvent() {
     console.log(this)
     console.log(this.className)
-    return this.className
+    let cardDay = this.className
+
+    let place = document.querySelector(".place")
+    let placeVal = place.textContent
+    
+    getData(placeVal, cardDay)
 }
 
 
@@ -57,7 +62,9 @@ function getInputValue(e){
 
 
 
-async function getData(inputVal){
+async function getData(inputVal, day = "today"){
+
+console.log(day)
 
 try{
     let [response, response2] = await Promise.all([
@@ -91,7 +98,7 @@ try{
      //triggerDataDisplay(weatherAndLocation, forecastArr, historyArr) 
 
    //return [dataForecast, dataHistory]
-   dataHandler(dataForecast, dataHistory)
+   dataHandler(dataForecast, dataHistory, day)
 
 } catch(err){
     console.log(err)
@@ -125,11 +132,13 @@ try{
 } */
 
 
-async function dataHandler(dataForecast, dataHistory){
+async function dataHandler(dataForecast, dataHistory, day){
+
+    console.log("handler", day)
 
     let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
 
-    triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
+    triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day)
 
 
     //if()

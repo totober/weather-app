@@ -3,7 +3,9 @@ import {setCardData} from "./dom"
 export {triggerDataDisplay}
 
 
-function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day = "today"){
+function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day){
+
+    console.log("trigger display", day)
 
     let [currentWeather, location] = weatherAndLocation
     let [today, tomorrow, lastDay] = forecastArr
