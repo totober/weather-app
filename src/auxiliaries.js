@@ -67,6 +67,7 @@ let iconsObj = {
 
 function iconSelector(obj){
 
+
     let weather = obj.weatherText.toLowerCase().trim()
     let isDay = obj.isDay 
 

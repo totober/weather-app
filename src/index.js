@@ -28,8 +28,7 @@ function closeMenu(e) {
 
 
 function nearCardsEvent() {
-    console.log(this)
-    console.log(this.className)
+
     let cardDay = this.className
 
     let place = document.querySelector(".place")
@@ -134,15 +133,9 @@ try{
 
 async function dataHandler(dataForecast, dataHistory, day){
 
-    console.log("handler", day)
+    let [location, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
 
-    let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
-
-    triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day)
-
-
-    //if()
-
+    triggerDataDisplay(location, forecastArr, historyArr, day)
 }
 
 

@@ -30,9 +30,11 @@ function createCard(){
     let img = createElement("img", "img")
     let sub = createElement("p", "sub")
 
-   let cardArr = [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv]
+   let cardArr = [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
+                  humidity, snow, wind, uv]
 
    cardArr.forEach(element => {card.appendChild(element)})
+
 
     return {card, cardArr}
 }
@@ -43,7 +45,8 @@ function setCardData(className, weatherObj, locationObj) {
     let {card, cardArr} = createCard()
     card.classList.add(className)
 
-    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, humidity, snow, wind, uv] = cardArr
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
+         humidity, snow, wind, uv] = cardArr
 
     img.src = iconSelector(weatherObj);
     sub.textContent = weatherObj.weatherText;
@@ -56,11 +59,11 @@ function setCardData(className, weatherObj, locationObj) {
     uv.textContent = weatherObj.uv;
 
     temp.textContent = `${Number.parseInt(weatherObj.tempC)}º`;
-    tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempC_feel)}º`
+    tempFeel.textContent = weatherObj.tempC_feel ? `${Number.parseInt(weatherObj.tempC_feel)}º` : tempFeel.classList.add("not");
     tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempC)}º/${Number.parseInt(weatherObj.minTempC)}º`;
     if(!weatherObj.isCelsius){ 
         temp.textContent = `${Number.parseInt(weatherObj.tempF)}º`;
-        tempFeel.textContent = `ST: ${Number.parseInt(weatherObj.tempF_feel)}º`;
+        tempFeel.textContent = weatherObj.tempF_feel ? `${Number.parseInt(weatherObj.tempF_feel)}º` : tempFeel.classList.add("not");
         tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempF)}º/${Number.parseInt(weatherObj.minTempF)}º`;
     } 
 
@@ -74,6 +77,97 @@ function setCardData(className, weatherObj, locationObj) {
     return card
 }
 
+
+function setPrincipalData(className, weatherObj, locationObj) {
+
+    let {card, cardArr} = createCard()
+    card.classList.add(className)
+
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
+        humidity, snow, wind, uv] = cardArr
+
+    img.src = iconSelector(weatherObj);
+    sub.textContent = weatherObj.weatherText;
+    place.textContent = `${locationObj.name}, ${locationObj.country}`; 
+
+
+    temp.textContent = 
+    weatherObj.isCelsius ? `${Number.parseInt(weatherObj.tempC)}º`
+                         : `${Number.parseInt(weatherObj.tempF)}º`;
+
+    date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
+    
+    return card
+}
+
+function setExtraData(className, weatherObj, locationObj) {
+
+    let {card, cardArr} = createCard()
+    card.classList.add(className)
+
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
+        humidity, snow, wind, uv] = cardArr
+
+
+    cloud.textContent = `${weatherObj.cloud} %`;
+    humidity.textContent = `${weatherObj.avgHumidity} %`;
+    wind.textContent = `${Number.parseInt(weatherObj.wind)} km`;
+    uv.textContent = weatherObj.uv;
+
+    precip.textContent = `${Number.parseInt(weatherObj.precipChance)} %`;
+    snow.textContent = `${weatherObj.snowChance} %`;
+    if(weatherObj.isHistory){ 
+        precip.textContent = `${Number.parseInt(weatherObj.precipTotal)} mm`;
+        snow.textContent = `${Number.parseInt(weatherObj.snowTotal)} mm`
+    };
+
+    tempFeel.textContent = weatherObj.tempC_feel ? `${Number.parseInt(weatherObj.tempC_feel)}º` : tempFeel.classList.add("not");
+    tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempC)}º/${Number.parseInt(weatherObj.minTempC)}º`;
+    if(!weatherObj.isCelsius){ 
+        tempFeel.textContent = weatherObj.tempF_feel ? `${Number.parseInt(weatherObj.tempF_feel)}º` : tempFeel.classList.add("not");
+        tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempF)}º/${Number.parseInt(weatherObj.minTempF)}º`;
+    } 
+    
+    return card
+}
+
+function setNearData(className, weatherObj, locationObj) {
+
+    let {card, cardArr} = createCard()
+    card.classList.add(className)
+
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
+        humidity, snow, wind, uv] = cardArr
+
+    img.src = iconSelector(weatherObj);
+    sub.textContent = weatherObj.weatherText;
+    date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
+
+    temp.textContent = 
+    weatherObj.isCelsius ? `${Number.parseInt(weatherObj.tempC)}º`
+                         : `${Number.parseInt(weatherObj.tempF)}º`;
+
+    return card
+}
+
+function setHourData(className, weatherObj, locationObj) {
+
+    let {card, cardArr} = createCard()
+    card.classList.add(className)
+
+    let [img, sub, place, temp, tempFeel, tempMinMax, date, cloud, precip, time, 
+        humidity, snow, wind, uv] = cardArr
+
+    img.src = iconSelector(weatherObj);
+    sub.textContent = weatherObj.weatherText;
+    time.textContent = weatherObj.time;
+
+    temp.textContent = 
+    weatherObj.isCelsius ? `${Number.parseInt(weatherObj.tempC)}º`
+                         : `${Number.parseInt(weatherObj.tempF)}º`;
+
+    return card
+}
 
 
 /* function currentHourCard(className, weather, location){

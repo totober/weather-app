@@ -29,7 +29,7 @@ class Hour extends CurrentWeather {
 }
 
 class Day {
-    constructor(obj, date){
+    constructor(obj, date, objCurrent){
         this.weatherText = obj.condition.text,
         this.weatherIcon = obj.condition.icon,
         this.maxTempC = obj.maxtemp_c,
@@ -38,6 +38,8 @@ class Day {
         this.minTempF = obj.mintemp_f,
         this.tempC = obj.avgtemp_c,
         this.tempF = obj.avgtemp_f,
+        this.tempC_feel = objCurrent ? objCurrent.tempC_feel : false,
+        this.tempF_feel = objCurrent ? objCurrent.tempF_feel : false,
         this.avgHumidity = obj.avghumidity,
         this.wind = obj.maxwind_kph,
         this.precipTotal = obj.totalprecip_mm,

@@ -294,7 +294,18 @@ h4 {
     padding: 3px;
     border-right: 1px solid var(--white);
     height: 100%;
+    transition: all 350ms;
+    cursor: pointer;
+}
 
+.card-near:hover {
+    background-color: var(--black-btn);
+    transform: scale(1.05);
+    border-radius: 5px;
+}
+
+.card-near:active {
+    transform: scale(0.97);
 }
 
 .card-near img {
@@ -396,7 +407,14 @@ h4 {
     grid-row: 2/3;
 } */
 
-.card-extra .temp::before,
+.card-extra * {
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+}
+
+.card-extra .tempFeel::before,
+.card-extra .tempMinMax::before,
 .card-extra .humidity::before,
 .card-extra .snow::before,
 .card-extra .precip::before,
@@ -409,13 +427,21 @@ h4 {
     background-position: center;
     display: inline-block;
     position: relative;
-    top: 14px;
+   /*  top: 14px; */
     right: 15px;
     filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
 }
 
+.card-extra .tempFeel::before {
+    content: "TS ";
+    font-size: 3.1rem;
+    right: 26px;
+    top: -17px;
+    filter: none;
+    font-weight: 200;
+}
 
-.card-extra .temp::before{
+.card-extra .tempMinMax::before{
     background-image: url(./img/temperature-s.svg);
 }
 
@@ -439,7 +465,7 @@ h4 {
     background-image: url(./img/uv-s.svg);
 }
 
-.card-extra :not(.temp, .humidity, .snow, .precip, .wind, .uv) {
+.card-extra :not(.tempMinMax, .humidity, .snow, .precip, .wind, .uv, .tempFeel), .card-extra *.not {
     display: none;
 } 
 

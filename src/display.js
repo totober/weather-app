@@ -3,16 +3,14 @@ import {setCardData} from "./dom"
 export {triggerDataDisplay}
 
 
-function triggerDataDisplay(weatherAndLocation, forecastArr, historyArr, day){
+function triggerDataDisplay(/* weatherAndLocation */ location, forecastArr, historyArr, day){
 
-    console.log("trigger display", day)
-
-    let [currentWeather, location] = weatherAndLocation
+    /* let [currentWeather, location] = weatherAndLocation */
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
     // today and current are the default values //
-    renderPrincipal(currentWeather, location)
+    renderPrincipal(/* currentWeather */ today.current, location)
     renderNear(forecastArr, historyArr, location)
     renderHours(today, location)
     renderExtra(today, location)
@@ -91,7 +89,14 @@ function renderNear(forecastArr, historyArr, location){
 
 function renderExtra(forecast, location){
 
+/*     if (forecast.hasOwnProperty("current")) {
+        console.log("wenas")
+        extraContainer.appendChild(setCardData("card-extra", extraData, location));
+    } */
+
     let extraData = forecast.day
+    console.log(forecast)
+    console.log(extraData)
 
     let extraContainer = document.querySelector(".extra")
     extraContainer.innerHTML = "";

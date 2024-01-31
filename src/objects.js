@@ -6,13 +6,14 @@ export {triggerDataStructuration}
 
 function triggerDataStructuration (dataForecast, dataHistory){
 
-    let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)]
+    /* let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)] */
+    let location = getLocation(dataForecast)
     let forecastArr = getForecastData(dataForecast)
     let historyArr = getHistoryData(dataHistory)
 
     console.log(forecastArr)
 
-    return [weatherAndLocation, forecastArr, historyArr]
+    return [location, forecastArr, historyArr]
 
 }
 
@@ -21,11 +22,13 @@ function getForecastData(obj) {
 
     let rawForecastArr = obj.forecast.forecastday;
 
+
     let [rawTodayArr, rawTomorrowArr, rawLastDayArr] = rawForecastArr;
 
-    let todayDay = new Day(rawTodayArr.day, rawTodayArr.date);
+    let currentWeather = getCurrentWeather(obj)
+    let todayDay = new Day(rawTodayArr.day, rawTodayArr.date, currentWeather);
     let todayHoursArr = getHours(rawTodayArr);
-    let todayObj = {day: todayDay, hours: todayHoursArr};
+    let todayObj = {current: currentWeather, day: todayDay, hours: todayHoursArr};
 
     let tomorrowDay = new Day(rawTomorrowArr.day, rawTomorrowArr.date);
     let tomorrowHoursArr = getHours(rawTomorrowArr);
@@ -36,6 +39,8 @@ function getForecastData(obj) {
     let lastDayObj = {day: lastDayDay, hours: lastDayHoursArr};
 
     let forecastArr = [todayObj, tomorrowObj, lastDayObj];
+
+    console.log(forecastArr)
 
     return forecastArr
 }
