@@ -6,14 +6,14 @@ import {triggerDataDisplay} from "./display";
 let input = document.querySelector("input")
 let nav = document.querySelector("nav")
 let btnMenu = document.querySelector(".menu")
+let tempOpt = document.querySelector(".tempOpt")
 
 input.addEventListener("keydown", getInputValue)
 btnMenu.addEventListener("click", showMenu)
+tempOpt.addEventListener("click", changeTemp)
 window.addEventListener("click", closeMenu)
 window.addEventListener("load", init)
 
-
-getPreviousDay()
 
 function showMenu(e) {
     btnMenu.nextElementSibling.classList.toggle("show-menu")
@@ -105,6 +105,28 @@ try{
 
     }  
 } 
+
+let body = document.body
+console.log(body)
+
+function changeTemp() {
+
+    let place = document.querySelector(".place")
+    let placeVal = place.textContent
+    let date = document.querySelector(".date")
+    let attr = date.getAttribute("data-day")
+
+    this.classList.toggle("fara")
+
+    if(this.classList.contains("fara")){
+        this.textContent = "to Celsius"
+    } else { 
+        this.textContent = "to Farenheit"
+    }
+
+    getData(placeVal, attr)
+
+}
 
 
 

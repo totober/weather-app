@@ -10,27 +10,31 @@ function triggerDataDisplay(/* weatherAndLocation */ location, forecastArr, hist
     let yesterday = historyArr
 
     // today and current are the default values //
-    renderPrincipal(/* currentWeather */ today, location)
+    renderPrincipal(/* currentWeather */ today, location, "today")
     renderNear(forecastArr, historyArr, location)
     renderHours(today, location)
     renderExtra(today, location)
 
    let chosenDay = ""
+   let attributeVal = ""
 
    switch(true) {
         case day === "yesterday":
             chosenDay = yesterday
+            attributeVal = "yesterday"
             break;
         case day === "tomorrow":
             chosenDay = tomorrow
+            attributeVal = "tomorrow"
             break;
         case day === "lastDay":
             chosenDay = lastDay
+            attributeVal = "lastDay"
             break;
    }
 
    if(day !== "today") {
-        renderPrincipal(chosenDay.day, location)
+        renderPrincipal(chosenDay.day, location, attributeVal)
         renderHours(chosenDay, location)
         renderExtra(chosenDay, location)
     }
@@ -59,13 +63,13 @@ function renderHours(forecast, location){
 
 
 
-function renderPrincipal(weather, location){
+function renderPrincipal(weather, location, attributeVal){
     
     let principalContainer = document.querySelector(".principal")
     principalContainer.innerHTML = ""
 
     //principalContainer.appendChild(setCardData("card-principal", weather, location))
-    principalContainer.appendChild(setPrincipalData("card-principal", weather, location))
+    principalContainer.appendChild(setPrincipalData("card-principal", weather, location, attributeVal))
 }
 
 
@@ -86,10 +90,10 @@ function renderNear(forecastArr, historyArr, location){
     nearArr[2].appendChild(setCardData("card-near", tomorrow.day, location))
     nearArr[3].appendChild(setCardData("card-near", lastDay.day, location)) */
 
-    nearArr[0].appendChild(setNearData("card-near", yesterday.day, location))
-    nearArr[1].appendChild(setNearData("card-near", today.day, location))
-    nearArr[2].appendChild(setNearData("card-near", tomorrow.day, location))
-    nearArr[3].appendChild(setNearData("card-near", lastDay.day, location))
+    nearArr[0].appendChild(setNearData("card-near", yesterday.day, location, "data-day-yesterday"))
+    nearArr[1].appendChild(setNearData("card-near", today.day, location, "data-day-today"))
+    nearArr[2].appendChild(setNearData("card-near", tomorrow.day, location, "data-day-tomorrow"))
+    nearArr[3].appendChild(setNearData("card-near", lastDay.day, location, "data-day-lastDay"))
 }
 
 

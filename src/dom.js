@@ -2,6 +2,8 @@ import { iconSelector } from "./auxiliaries"
 
 export {setCardData, setPrincipalData, setNearData}
 
+let tempOpt = document.querySelector(".tempOpt")
+
 
 function createElement(element, className) {
 
@@ -40,7 +42,7 @@ function createCard(){
 }
 
 
-function setCardData(className, weatherObj, locationObj) {
+function setCardData(className, weatherObj, locationObj, attributeName) {
 
     let {card, cardArr} = createCard()
     card.classList.add(className)
@@ -51,6 +53,7 @@ function setCardData(className, weatherObj, locationObj) {
     img.src = iconSelector(weatherObj);
     sub.textContent = weatherObj.weatherText;
     place.textContent = `${locationObj.name}, ${locationObj.country}`; 
+    date.setAttribute(attributeName, "")
     date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
     time.textContent = weatherObj.time;
     cloud.textContent = `${weatherObj.cloud} %`;
@@ -61,7 +64,8 @@ function setCardData(className, weatherObj, locationObj) {
     temp.textContent = `${Number.parseInt(weatherObj.tempC)}º`;
     tempFeel.textContent = weatherObj.tempC_feel ? `${Number.parseInt(weatherObj.tempC_feel)}º` : tempFeel.classList.add("not");
     tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempC)}º/${Number.parseInt(weatherObj.minTempC)}º`;
-    if(!weatherObj.isCelsius){ 
+    if( tempOpt.classList.contains("fara")){ 
+        console.log("ola k ase")
         temp.textContent = `${Number.parseInt(weatherObj.tempF)}º`;
         tempFeel.textContent = weatherObj.tempF_feel ? `${Number.parseInt(weatherObj.tempF_feel)}º` : tempFeel.classList.add("not");
         tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempF)}º/${Number.parseInt(weatherObj.minTempF)}º`;
@@ -78,7 +82,7 @@ function setCardData(className, weatherObj, locationObj) {
 }
 
 
-function setPrincipalData(className, weatherObj, locationObj) {
+function setPrincipalData(className, weatherObj, locationObj, attributeVal) {
 
     let {card, cardArr} = createCard()
     card.classList.add(className)
@@ -88,7 +92,6 @@ function setPrincipalData(className, weatherObj, locationObj) {
 
     let weather = "";
     if (weatherObj.hasOwnProperty("current")) {
-        console.log("asi es")
        weather = weatherObj.current
     } else {
         weather = weatherObj
@@ -99,10 +102,10 @@ function setPrincipalData(className, weatherObj, locationObj) {
     place.textContent = `${locationObj.name}, ${locationObj.country}`; 
 
 
-    temp.textContent = weather.isCelsius ? 
-    `${Number.parseInt(weather.tempC)}º` : 
-    `${Number.parseInt(weather.tempF)}º`
+    temp.textContent = tempOpt.classList.contains("fara") ? 
+    `${Number.parseInt(weather.tempF)}º` : `${Number.parseInt(weather.tempC)}º`
                      
+    date.setAttribute("data-day", attributeVal)
     date.textContent = `${weather.date.slice(8)}/${weather.date.slice(5, 7)}, average tº`;
 
     if (weatherObj.hasOwnProperty("current")) {
@@ -136,17 +139,19 @@ function setExtraData(className, weatherObj, locationObj) {
         snow.textContent = `${Number.parseInt(weatherObj.snowTotal)} mm`
     };
 
-    tempFeel.textContent = weatherObj.tempC_feel ? `${Number.parseInt(weatherObj.tempC_feel)}º` : tempFeel.classList.add("not");
+    tempFeel.textContent = weatherObj.tempC_feel ? 
+    `${Number.parseInt(weatherObj.tempC_feel)}º` : tempFeel.classList.add("not");
     tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempC)}º/${Number.parseInt(weatherObj.minTempC)}º`;
-    if(!weatherObj.isCelsius){ 
-        tempFeel.textContent = weatherObj.tempF_feel ? `${Number.parseInt(weatherObj.tempF_feel)}º` : tempFeel.classList.add("not");
+    if(tempOpt.classList.contains("fara")){ 
+        tempFeel.textContent = weatherObj.tempF_feel ? 
+        `${Number.parseInt(weatherObj.tempF_feel)}º` : tempFeel.classList.add("not");
         tempMinMax.textContent = `${Number.parseInt(weatherObj.maxTempF)}º/${Number.parseInt(weatherObj.minTempF)}º`;
     } 
     
     return card
 }
 
-function setNearData(className, weatherObj, locationObj) {
+function setNearData(className, weatherObj, locationObj, attributeName) {
 
     let {card, cardArr} = createCard()
     card.classList.add(className)
@@ -156,11 +161,12 @@ function setNearData(className, weatherObj, locationObj) {
 
     img.src = iconSelector(weatherObj);
     sub.textContent = weatherObj.weatherText;
+    date.setAttribute(attributeName, "")
     date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
 
-    temp.textContent = 
-    weatherObj.isCelsius ? `${Number.parseInt(weatherObj.tempC)}º avg.`
-                         : `${Number.parseInt(weatherObj.tempF)}º avg.`;
+    temp.textContent = tempOpt.classList.contains("fara") ? 
+    `${Number.parseInt(weatherObj.tempF)}º avg.` : `${Number.parseInt(weatherObj.tempC)}º avg.`;
+    
 
     return card
 }
