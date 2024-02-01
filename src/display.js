@@ -1,4 +1,4 @@
-import {setCardData, setPrincipalData} from "./dom"
+import {setCardData, setPrincipalData, setNearData} from "./dom"
 
 export {triggerDataDisplay}
 
@@ -81,10 +81,15 @@ function renderNear(forecastArr, historyArr, location){
     let yesterday = historyArr
 
 
-    nearArr[0].appendChild(setCardData("card-near", yesterday.day, location))
+    /* nearArr[0].appendChild(setCardData("card-near", yesterday.day, location))
     nearArr[1].appendChild(setCardData("card-near", today.day, location))
     nearArr[2].appendChild(setCardData("card-near", tomorrow.day, location))
-    nearArr[3].appendChild(setCardData("card-near", lastDay.day, location))
+    nearArr[3].appendChild(setCardData("card-near", lastDay.day, location)) */
+
+    nearArr[0].appendChild(setNearData("card-near", yesterday.day, location))
+    nearArr[1].appendChild(setNearData("card-near", today.day, location))
+    nearArr[2].appendChild(setNearData("card-near", tomorrow.day, location))
+    nearArr[3].appendChild(setNearData("card-near", lastDay.day, location))
 }
 
 

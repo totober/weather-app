@@ -12,7 +12,19 @@ import sleetImg from "./img/sleet-s.svg"
 import snowImg from "./img/snow-s.svg"
 
 
-export {compareObjects, iconSelector}
+export {compareObjects, iconSelector, getPreviousDay}
+
+
+function getPreviousDay() {
+
+    let date = new Date()
+    date.setDate(date.getDate() - 1);
+
+    let fullDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
+    return fullDate;
+}
+
 
 
 /// ARRAYS OBJECT FOR ICON COMPARITION ///

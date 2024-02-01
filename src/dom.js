@@ -1,6 +1,6 @@
 import { iconSelector } from "./auxiliaries"
 
-export {setCardData, setPrincipalData}
+export {setCardData, setPrincipalData, setNearData}
 
 
 function createElement(element, className) {
@@ -99,16 +99,13 @@ function setPrincipalData(className, weatherObj, locationObj) {
     place.textContent = `${locationObj.name}, ${locationObj.country}`; 
 
 
-    temp.textContent = 
-    weather.isCelsius ? `${Number.parseInt(weather.tempC)}º`
-                         : `${Number.parseInt(weather.tempF)}º`;
+    temp.textContent = weather.isCelsius ? 
+    `${Number.parseInt(weather.tempC)}º` : 
+    `${Number.parseInt(weather.tempF)}º`
+                     
+    date.textContent = `${weather.date.slice(8)}/${weather.date.slice(5, 7)}, average tº`;
 
-                        
-    date.textContent = `${weather.date.slice(8)}/${weather.date.slice(5, 7)}`;
-
-    console.log(weatherObj)
     if (weatherObj.hasOwnProperty("current")) {
-        console.log("topus")
         date.textContent = "Today, currently";
     }
 
@@ -162,8 +159,8 @@ function setNearData(className, weatherObj, locationObj) {
     date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
 
     temp.textContent = 
-    weatherObj.isCelsius ? `${Number.parseInt(weatherObj.tempC)}º`
-                         : `${Number.parseInt(weatherObj.tempF)}º`;
+    weatherObj.isCelsius ? `${Number.parseInt(weatherObj.tempC)}º avg.`
+                         : `${Number.parseInt(weatherObj.tempF)}º avg.`;
 
     return card
 }
