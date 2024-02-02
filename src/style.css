@@ -9,6 +9,22 @@
     --white:  #EDEADE;
 }
 
+.theme-dark {
+    --bgc: linear-gradient(to left, #000000, #2D3436);
+    --color-card: rgb(30, 30, 30);
+    --color-btn: rgba(52, 52, 52, 0.9);
+    --color-font: rgb(237, 234, 222) ; /* #EDEADE */
+    --filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%)
+}
+
+.theme-light {
+    --bgc: linear-gradient(to left, #ffffff, #d2cbc9);
+    --color-card: rgb(225,225,225);
+    --color-btn: rgba(203, 203, 203, 0.9);
+    --color-font: rgb(18, 21, 33);
+    --filter: invert(6%) sepia(15%) saturate(1801%) hue-rotate(191deg) brightness(97%) contrast(95%);
+}
+
 body {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -18,9 +34,10 @@ body {
         "main aside"
         "footer footer";
     gap: 10px;
-    background-image: linear-gradient(to left, #000000, #2D3436);
+    background-image: var(--bgc);
     color: #EDEADE; /* color name: alabaster */
     padding: 8px;
+    color: var(--color-font);
 }
 
 @media (max-width: 600px) {
@@ -55,7 +72,7 @@ header {
     height: 40px;
     background-color: transparent;
     border: none;
-    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);  
+    filter: var(--filter);  
     transition: 0.3s ease-in-out;
 }
 
@@ -70,7 +87,7 @@ nav ul {
     border-radius: 5px;
     font-size: 1.3rem;
     margin: 0;
-    background-color: var(--black-el);
+    background-color: var(--color-card);
     min-height: 8rem;
     min-width: 12rem;
 }
@@ -97,14 +114,14 @@ nav ul.show-menu {
 }
 
 nav ul li {
-    border-bottom: 1px solid var(--white);
+    border-bottom: 1px solid var(--color-font);
     padding: 5px;
     cursor: pointer;
     transition: all 350ms;
 }
 
 nav ul li:hover {
-    background-color: var(--black-btn);
+    background-color: var(--color-btn);
     transform: scale(1.05);
 }
 
@@ -124,8 +141,8 @@ input {
     width: 97%;
     height: 1.8rem;
     border-radius: 8px;
-    background-color: var(--black-el);
-    color: var(--white);
+    background-color: var(--color-card);
+    color: var(--color-font);
     font-weight: 600;
     font-size: 16px;
     padding: 5px;
@@ -191,7 +208,7 @@ main {
 
 .card-principal img {
     width: 40%;
-    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
+    filter: var(--filter);
     justify-self: center;
     align-self: center;
 
@@ -253,7 +270,7 @@ main {
 /* /// MAIN - NEAR /// */
 
 .near {
-    background-color: var(--black-el);
+    background-color: var(--color-card);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
     align-content: center;
@@ -271,14 +288,14 @@ main {
     align-items: center;
     row-gap: 2px;
     padding: 3px;
-    border-right: 1px solid var(--white);
+    border-right: 1px solid var(--color-font);
     height: 100%;
     transition: all 350ms;
     cursor: pointer;
 }
 
 .card-near:hover {
-    background-color: var(--black-btn);
+    background-color: var(--color-btn);
     transform: scale(1.05);
     border-radius: 5px;
 }
@@ -289,7 +306,7 @@ main {
 
 .card-near img {
     width: 38%;
-    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
+    filter: var(--filter);
     grid-row: 2/3;
     /* margin-top: 15px;
     margin-bottom: 15px; */
@@ -338,7 +355,7 @@ main {
 
 
 .extra{
-    background-color: var(--black-el);
+    background-color: var(--color-card);
     
 }
 
@@ -409,7 +426,7 @@ main {
     position: relative;
    /*  top: 14px; */
     right: 15px;
-    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
+    filter: var(--filter);
 }
 
 .card-extra .tempFeel::before {
@@ -454,7 +471,7 @@ main {
 
 aside {
     grid-area: aside;
-    background-color: var(--black-el);
+    background-color: var(--color-card);
     border-radius: 8px;
     padding: 8px;
     /* margin-top: 33px;
@@ -560,13 +577,13 @@ aside {
     align-items: center;
     padding: 5px 15px;
     column-gap: 2px;
-    border-bottom: solid 1px white;
+    border-bottom: solid 1px var(--color-font);
     /* margin-bottom: 1px; */
 }
 
 .card-aside img {
     width: 12%;
-    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
+    filter: var(--filter);
     /* grid-column: 2/3; */
     order: 2;
 }
@@ -613,7 +630,7 @@ aside button {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    filter: invert(92%) sepia(11%) saturate(399%) hue-rotate(331deg) brightness(108%) contrast(86%);
+    filter: var(--filter);
     transition: ease-in-out 0.3s;
     z-index: 10;
 
@@ -623,14 +640,14 @@ button.down {
     justify-self: center;
     /* align-self: end; */
     background-image: url(./img/angle-down-s.svg);
-    box-shadow: 1px -1px 1px var(--black-el);
+    box-shadow: 1px -1px 1px var(--color-card);
     grid-area: down;
 }
 
 button.up {
     justify-self: center;
     background-image: url(./img/angle-up-s.svg);
-    box-shadow: 1px 1px 1px var(--black-el);
+    box-shadow: 1px 1px 1px var(--color-card);
     grid-area: up;
 }
 
