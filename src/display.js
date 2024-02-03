@@ -1,17 +1,20 @@
-import {setCardData, setPrincipalData, setNearData} from "./dom"
+import {setCardData, setPrincipalData, setNearData, setExtraData, setHourData, createErrorCard} from "./dom"
 
-export {triggerDataDisplay}
+export {triggerDataDisplay, renderError}
 
 
-function triggerDataDisplay(/* weatherAndLocation */ location, forecastArr, historyArr, day){
+function triggerDataDisplay(location, forecastArr, historyArr, day = "today"){
 
-    /* let [currentWeather, location] = weatherAndLocation */
+
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
+    handleErrorClass(false)
+
+    // this renders always the same way //
+    renderNear(forecastArr, historyArr, location)
     // today and current are the default values //
     renderPrincipal(/* currentWeather */ today, location, "today")
-    renderNear(forecastArr, historyArr, location)
     renderHours(today, location)
     renderExtra(today, location)
 
@@ -43,6 +46,8 @@ function triggerDataDisplay(/* weatherAndLocation */ location, forecastArr, hist
 
 
 function renderHours(forecast, location){
+    
+    let aside = document.querySelector("aside")
 
     let sliderContainer = document.querySelector(".slider")
 
@@ -53,10 +58,12 @@ function renderHours(forecast, location){
 
     hours.forEach( (hour, i) => {
         if(i < 12){
-            sliderContainer.firstElementChild.appendChild(setCardData("card-aside", hour, location))
+            /* sliderContainer.firstElementChild.appendChild(setCardData("card-aside", hour, location)) */
+            sliderContainer.firstElementChild.appendChild(setHourData("card-aside", hour, location))
         } else if(i >= 12){
 
-            sliderContainer.lastElementChild.appendChild(setCardData("card-aside", hour, location))  
+            /* sliderContainer.lastElementChild.appendChild(setCardData("card-aside", hour, location))  */ 
+            sliderContainer.lastElementChild.appendChild(setHourData("card-aside", hour, location)) 
         }    
    })
 }
@@ -99,17 +106,43 @@ function renderNear(forecastArr, historyArr, location){
 
 function renderExtra(forecast, location){
 
-/*     if (forecast.hasOwnProperty("current")) {
-        console.log("wenas")
-        extraContainer.appendChild(setCardData("card-extra", extraData, location));
-    } */
-
     let extraData = forecast.day
-    console.log(forecast)
-    console.log(extraData)
 
     let extraContainer = document.querySelector(".extra")
     extraContainer.innerHTML = "";
 
-    extraContainer.appendChild(setCardData("card-extra", extraData, location));
+    /* extraContainer.appendChild(setCardData("card-extra", extraData, location)); */
+    extraContainer.appendChild(setExtraData("card-extra", extraData, location));
+}
+
+function renderError(){
+
+    let body = document.body
+   
+    handleErrorClass(true)
+
+    let principal = document.querySelector(".principal")
+    principal.innerHTML = ""
+    principal.appendChild(createErrorCard())
+}
+
+function handleErrorClass(error){
+
+    let body = document.body
+
+    let main = document.querySelector("main")
+
+    let mainArr = Array.from(main.children)
+
+    let aside = document.querySelector("aside")
+
+    let elements = [body, main, mainArr, aside].flat()
+
+    if(error) {
+
+        elements.forEach(el => el.classList.add("error"))
+    } else {
+        
+        elements.forEach(el => el.classList.remove("error"))
+    }
 }

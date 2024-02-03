@@ -1,18 +1,26 @@
 import {triggerDataStructuration} from "./objects";
 import {compareObjects, getPreviousDay} from "./auxiliaries";
-import {triggerDataDisplay} from "./display";
+import {triggerDataDisplay, renderError} from "./display";
+
+import imgFace from "./img/confused-black-line.svg";
+import imgFace2 from "./img/confused-white-line.svg";
 
 
 let input = document.querySelector("input")
 let nav = document.querySelector("nav")
 let btnMenu = document.querySelector(".menu")
-let tempOpt = document.querySelector(".tempOpt")
+let tempOpt = document.querySelector("ul :nth-child(2)")
 let theme = document.querySelector(".theme")
+let near = document.querySelector(".near")
+let nearArr = Array.from(near.children)
+let dialog = document.querySelector("dialog")
+
 
 input.addEventListener("keydown", getInputValue)
 btnMenu.addEventListener("click", showMenu)
 tempOpt.addEventListener("click", changeTemp)
 theme.addEventListener("click", changeTheme)
+nearArr.forEach(element => element.addEventListener("click", nearCardsEvent))
 window.addEventListener("click", closeMenu)
 window.addEventListener("load", init)
 
@@ -32,22 +40,35 @@ function closeMenu(e) {
 
 function nearCardsEvent() {
 
+
     let cardDay = this.className
 
-    let place = document.querySelector(".place")
-    let placeVal = place.textContent
-    
-    getData(placeVal, cardDay)
+    let {location, forecastArr, historyArr} = retrieveData()
+
+    triggerDataDisplay(location, forecastArr, historyArr, cardDay)
 }
 
 
 function init() {
-    getData("buenos aires")
+    
+    
+    let place = JSON.parse(localStorage.getItem("location"))
+
+   try{
+    getData(place.name)
+   } 
+   catch(err){
+    console.log(err)
+    getData("argentina")
+   }
+    //getData("buenos aires")
     //mainFunction("buenos aires")
 
-    let near = document.querySelector(".near")
-    let nearArr = Array.from(near.children)
-    nearArr.forEach(element => element.addEventListener("click", nearCardsEvent))
+
+    setTheme(localStorage.getItem("theme"))
+    setTemp(localStorage.getItem("temp"))
+    
+
 }
 
 
@@ -59,15 +80,11 @@ function getInputValue(e){
 
     getData(inputVal)
 
-    //mainFunction(inputVal) 
-    //triggerDataDisplay()
 }
 
 
 
-async function getData(inputVal, day = "today"){
-
-console.log(day)
+async function getData(inputVal){
 
 try{
     let [response, response2] = await Promise.all([
@@ -101,19 +118,28 @@ try{
      //triggerDataDisplay(weatherAndLocation, forecastArr, historyArr) 
 
    //return [dataForecast, dataHistory]
-   dataHandler(dataForecast, dataHistory, day)
+   dataHandler(dataForecast, dataHistory)
 
 } catch(err){
     console.log(err)
-
+    
+       // showDialog()
+       renderError()
     }  
 } 
 
 
-function changeTemp() {
+function showDialog(){
+    dialog.showModal()
 
-    let place = document.querySelector(".place")
-    let placeVal = place.textContent
+    let img = dialog.firstElementChild
+    img.src = imgFace 
+}
+
+
+
+/* function changeTemp() {
+
     let date = document.querySelector(".date")
     let attr = date.getAttribute("data-day")
 
@@ -121,22 +147,47 @@ function changeTemp() {
 
     if(this.classList.contains("fara")){
         this.textContent = "to Celsius"
+        localStorage.setItem("temp", "fara")
     } else { 
         this.textContent = "to Fahrenheit"
+        localStorage.setItem("temp", "celsius")
     }
 
-    //getData(placeVal, attr)
-
-   let [location, forecastArr, historyArr] = retrieveData()
-   console.log("aca devolvemos la data")
+   let {location, forecastArr, historyArr} = retrieveData()
 
    triggerDataDisplay(location, forecastArr, historyArr, attr)
+} */
 
-   console.log("ERA GUARDAR LOS DATOS PAPAAAAAA")
- 
+
+
+function changeTemp() {
+
+    let date = document.querySelector(".date")
+    let attr = date.getAttribute("data-day")
+
+    if(localStorage.getItem("temp") === "fara"){
+        this.textContent = "to Celsius"
+        setTemp("celsius")
+    } else { 
+        this.textContent = "to Fahrenheit"
+        setTemp("fara")
+    }
+
+   let {location, forecastArr, historyArr} = retrieveData()
+
+   triggerDataDisplay(location, forecastArr, historyArr, attr)
 }
 
-function changeTheme(){
+function setTemp(temperature) {
+
+    let tempOpt = document.querySelector("ul :nth-child(2)")
+
+    localStorage.setItem("temp", temperature)
+    tempOpt.className = temperature
+}
+
+
+/* function changeTheme(){
 
     let body = document.body
 
@@ -150,33 +201,26 @@ function changeTheme(){
         body.classList.add("theme-dark")
         this.textContent = "Light theme"
     }
+} */
 
+function changeTheme(){
+
+    if(localStorage.getItem("theme") === "theme-dark"){
+        setTheme("theme-light")
+        this.textContent = "to dark theme"
+       
+    } else{
+        setTheme("theme-dark")
+        this.textContent = "to light theme"
+    }
 }
 
+function setTheme(theme){
+    
+    localStorage.setItem("theme", theme)
+    document.documentElement.className = theme
+}
 
-
-/* async function mainFunction (inputVal) {
-
-    try{
-        let [dataForecast, dataHistory] = await getData(inputVal)
-
-        console.log("ave", dataForecast)
-        console.log("ave", dataHistory)
-
-
-       let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
-
-
-
-        triggerDataDisplay(weatherAndLocation, forecastArr, historyArr)
-
-     }
-    catch(err) {
-        console.log(err)
-    }
-   
-
-} */
 
 
 async function dataHandler(dataForecast, dataHistory, day){
@@ -184,7 +228,6 @@ async function dataHandler(dataForecast, dataHistory, day){
     let [location, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
 
     storeData(location, forecastArr, historyArr)
-    console.log("aca store data")
 
     triggerDataDisplay(location, forecastArr, historyArr, day)
 }
@@ -205,7 +248,7 @@ function retrieveData(){
     let forecastArr = JSON.parse(localStorage.getItem("forecastArr"))
     let historyArr = JSON.parse(localStorage.getItem("historyArr"))
 
-    return [location, forecastArr, historyArr]
+    return {location, forecastArr, historyArr}
 }
 
 
@@ -216,8 +259,9 @@ function retrieveData(){
 
 
 
-let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 
+
+let ex = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
 let pass = "?key=6401a6548a224689902171841233012"
 let url = "http://api.weatherapi.com/v1"
 let current = "/current.json"

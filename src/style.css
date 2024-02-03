@@ -145,8 +145,12 @@ input {
     color: var(--color-font);
     font-weight: 600;
     font-size: 16px;
-    padding: 5px;
+    padding: 5px 10px; 
     border: none;
+}
+
+input:focus {
+    outline: none;
 }
 
 /*/// MAIN ///*/
@@ -664,3 +668,68 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+/*/// ERRORS ///*/
+
+body.error {
+    display: flex;
+    flex-direction: column;
+}
+
+main.error {
+    display: flex;
+    min-height: 100svh;
+}
+
+main.error .principal.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main.error .extra.error {
+    display: none;
+}
+
+main.error .near.error {
+    display: none;
+}
+
+aside.error {
+    display: none;
+}
+
+.principal.error div.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.principal.error img {
+    width: 30%;
+    filter: var(--filter);
+}
+
+main.error .principal.error p {
+    font-size: clamp(1rem, 4vw + 1rem , 5rem);
+    /* font-size: 40px; */
+    text-align: center;
+}
+
+/* dialog {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+
+    font-size: 4rem;
+}
+
+dialog img {
+    width: 30%;
+}
+
+dialog p {
+    text-align: center;
+} */
