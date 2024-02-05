@@ -166,10 +166,10 @@ function changeTemp() {
     let attr = date.getAttribute("data-day")
 
     if(localStorage.getItem("temp") === "fara"){
-        this.textContent = "to Celsius"
+        this.textContent = "to Fahrenheit"
         setTemp("celsius")
     } else { 
-        this.textContent = "to Fahrenheit"
+        this.textContent = "to Celsius"
         setTemp("fara")
     }
 
