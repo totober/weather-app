@@ -42,7 +42,8 @@ let iconsObj = {
             "Moderate or heavy showers of ice pellets", sleetImg],
 
     thunder: ["Thundery outbreaks possible", "Patchy light rain with thunder", "Moderate or heavy rain with thunder",
-            "Patchy light snow with thunder", "Moderate or heavy snow with thunder", thunderImg],
+            "Patchy light snow with thunder", "Moderate or heavy snow with thunder", "Thundery outbreaks in nearby",
+            "Patchy light rain in area with thunder", thunderImg],
 
     fog: ["Mist", "Fog", "Freezing fog", fogImg],
 
@@ -79,80 +80,17 @@ let iconsObj = {
 
 function iconSelector(obj){
 
-
     let weather = obj.weatherText.toLowerCase().trim()
     let isDay = obj.isDay 
 
-    /// TERNARY OPERATOR ///
     let nightOrDay = isDay ? iconsObj.dayArr() : iconsObj.nightArr();
 
-    let img = ""
+    let img = null
 
-  /// THE FIRST THING I DID WAS TWO LOOPS, ONE FOR DAY AND OTHER FOR NIGHT.
-  /// AWFUL. AND HEAVILY NESTED.  
-
-  /*   if(!isDay) {
-        nightArr.forEach(arr => {
-
-            if(img !== ""){ return }
-
-            arr.some((string, i, array) => {
-                if(weather === string) {
-                    img = array[array.length -1]
-                    console.log(img)
-                    return 
-                }
-            })
-        })
-    } */
-       /*  if(isDay) {
-        dayArr.forEach(arr => {
-
-            if(img !== ""){ return }
-
-            arr.some((string, i, array) => {
-                if(weather === string) {
-                    img = array[array.length -1]
-                    console.log(img)
-                    return 
-                }
-            })
-        })
-    } */
-
-
- /// THEN I TRY TO USE FOR OF LOOPS, BECAUSE I WANTED TO BREAK THE LOOP WHEN I HAVE THE ELEMENT I WANTED 
-
-/*     for (const arr of nightArr){
-
-        if(img !== ""){ break }
-
-        for (const element of arr ) {
-            if(weather === element) {
-                img = arr[arr.length -1]
-                break
-            }
-        }
-    } */
-
-    /*     for (const arr of dayArr){
-
-        if(img !== ""){ break }
-
-        for (const element of arr ) {
-            if(weather === element) {
-                img = arr[arr.length -1]
-                break
-            }
-        }
-    } */
-
-
-    /// FINALLY, I DIDNT WANT TO USE 2 EQUAL LOOPS, SO RESOLVED TO USE A TERNARY OPERATOR AND THEN A SINGLE LOOP.
 
     for (const arr of nightOrDay){
 
-        if(img !== ""){ break }
+        if(img !== null){ break }
 
         for (const element of arr ) {
 

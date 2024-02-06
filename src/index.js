@@ -2,9 +2,6 @@ import {triggerDataStructuration} from "./objects";
 import {compareObjects, getPreviousDay} from "./auxiliaries";
 import {triggerDataDisplay, renderError} from "./display";
 
-import imgFace from "./img/confused-black-line.svg";
-import imgFace2 from "./img/confused-white-line.svg";
-
 
 let input = document.querySelector("input")
 let nav = document.querySelector("nav")
@@ -13,8 +10,6 @@ let tempOpt = document.querySelector("ul :nth-child(2)")
 let theme = document.querySelector(".theme")
 let near = document.querySelector(".near")
 let nearArr = Array.from(near.children)
-let dialog = document.querySelector("dialog")
-
 
 input.addEventListener("keydown", getInputValue)
 btnMenu.addEventListener("click", showMenu)
@@ -40,7 +35,6 @@ function closeMenu(e) {
 
 function nearCardsEvent() {
 
-
     let cardDay = this.className
 
     let {location, forecastArr, historyArr} = retrieveData()
@@ -51,24 +45,19 @@ function nearCardsEvent() {
 
 function init() {
     
-    
     let place = JSON.parse(localStorage.getItem("location"))
 
    try{
     getData(place.name)
+    setTheme(localStorage.getItem("theme"))
+    setTemp(localStorage.getItem("temp"))
    } 
    catch(err){
     console.log(err)
     getData("argentina")
+    setTheme("theme-dark")
+    setTemp("celsius")
    }
-    //getData("buenos aires")
-    //mainFunction("buenos aires")
-
-
-    setTheme(localStorage.getItem("theme"))
-    setTemp(localStorage.getItem("temp"))
-    
-
 }
 
 
@@ -107,58 +96,13 @@ try{
     console.log(dataForecast)
     console.log(dataHistory)
 
- /*    let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)]
-    let forecastArr = getForecastData(dataForecast)
-    let historyArr = getHistoryData(dataHistory) */
-
-    ///ACAAAAAA///
-    //let [weatherAndLocation, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory) 
-
- 
-     //triggerDataDisplay(weatherAndLocation, forecastArr, historyArr) 
-
-   //return [dataForecast, dataHistory]
    dataHandler(dataForecast, dataHistory)
 
 } catch(err){
-    console.log(err)
-    
-       // showDialog()
+
        renderError()
     }  
 } 
-
-
-function showDialog(){
-    dialog.showModal()
-
-    let img = dialog.firstElementChild
-    img.src = imgFace 
-}
-
-
-
-/* function changeTemp() {
-
-    let date = document.querySelector(".date")
-    let attr = date.getAttribute("data-day")
-
-    this.classList.toggle("fara")
-
-    if(this.classList.contains("fara")){
-        this.textContent = "to Celsius"
-        localStorage.setItem("temp", "fara")
-    } else { 
-        this.textContent = "to Fahrenheit"
-        localStorage.setItem("temp", "celsius")
-    }
-
-   let {location, forecastArr, historyArr} = retrieveData()
-
-   triggerDataDisplay(location, forecastArr, historyArr, attr)
-} */
-
-
 
 function changeTemp() {
 
@@ -178,6 +122,7 @@ function changeTemp() {
    triggerDataDisplay(location, forecastArr, historyArr, attr)
 }
 
+
 function setTemp(temperature) {
 
     let tempOpt = document.querySelector("ul :nth-child(2)")
@@ -186,22 +131,6 @@ function setTemp(temperature) {
     tempOpt.className = temperature
 }
 
-
-/* function changeTheme(){
-
-    let body = document.body
-
-    if(body.classList.contains("theme-dark")){
-        body.classList.remove("theme-dark")
-        body.classList.add("theme-light")
-        this.textContent = "Dark theme"
-       
-    } else {
-        body.classList.remove("theme-light")
-        body.classList.add("theme-dark")
-        this.textContent = "Light theme"
-    }
-} */
 
 function changeTheme(){
 
@@ -223,13 +152,13 @@ function setTheme(theme){
 
 
 
-async function dataHandler(dataForecast, dataHistory, day){
+async function dataHandler(dataForecast, dataHistory){
 
     let [location, forecastArr, historyArr] = triggerDataStructuration(dataForecast, dataHistory)
 
     storeData(location, forecastArr, historyArr)
 
-    triggerDataDisplay(location, forecastArr, historyArr, day)
+    triggerDataDisplay(location, forecastArr, historyArr)
 }
 
 

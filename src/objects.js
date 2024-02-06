@@ -3,18 +3,13 @@ import {CurrentWeather, Day, Hour, Location} from "./class"
 export {triggerDataStructuration}
 
 
-
 function triggerDataStructuration (dataForecast, dataHistory){
 
-    /* let weatherAndLocation = [getCurrentWeather(dataForecast), getLocation(dataForecast)] */
     let location = getLocation(dataForecast)
     let forecastArr = getForecastData(dataForecast)
     let historyArr = getHistoryData(dataHistory)
 
-    console.log(forecastArr)
-
     return [location, forecastArr, historyArr]
-
 }
 
 
@@ -39,8 +34,6 @@ function getForecastData(obj) {
     let lastDayObj = {day: lastDayDay, hours: lastDayHoursArr};
 
     let forecastArr = [todayObj, tomorrowObj, lastDayObj];
-
-    console.log(forecastArr)
 
     return forecastArr
 }

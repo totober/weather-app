@@ -13,8 +13,7 @@ class CurrentWeather {
         this.wind = obj.wind_kph,
         this.precipTotal = obj.precip_mm,
         this.date = date,
-        this.isDay = obj.is_day ? true : false,
-        this.isCelsius = true
+        this.isDay = obj.is_day ? true : false
     }
 }
 
@@ -38,9 +37,9 @@ class Day {
         this.minTempF = obj.mintemp_f,
         this.tempC = obj.avgtemp_c,
         this.tempF = obj.avgtemp_f,
-        this.tempC_feel = objCurrent ? objCurrent.tempC_feel : false,
-        this.tempF_feel = objCurrent ? objCurrent.tempF_feel : false,
-        this.avgHumidity = obj.avghumidity,
+        this.tempC_feel = objCurrent ? objCurrent.tempC_feel : false, // PORQUE AGREGUE ESTO? PORQUE EN LA CARD EXTRA
+        this.tempF_feel = objCurrent ? objCurrent.tempF_feel : false, // NECESITO ESTE DATO ADEMAS DE LOS DEL DAY
+        this.avgHumidity = obj.avghumidity,                // Y ERA MAS FACIL AGREGARLO ACA, QUE PONER CONDICIONALES
         this.wind = obj.maxwind_kph,
         this.precipTotal = obj.totalprecip_mm,
         this.precipChance = obj.daily_chance_of_rain,
@@ -49,8 +48,7 @@ class Day {
         this.uv = obj.uv,
         this.date = date,
         this.isDay = true,
-        this.isHistory = false,
-        this.isCelsius = true
+        this.isHistory = false
     }
 }
 
