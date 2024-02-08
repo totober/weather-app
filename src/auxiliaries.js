@@ -11,9 +11,9 @@ import rainNightImg from "./img/rainNight-s.svg"
 import sleetImg from "./img/sleet-s.svg"
 import snowImg from "./img/snow-s.svg"
 
+export {compareObjects, iconSelector, getPreviousDay, carousel}
 
-export {compareObjects, iconSelector, getPreviousDay}
-
+/// GET YESTERDAY DAY ///
 
 function getPreviousDay() {
 
@@ -24,7 +24,6 @@ function getPreviousDay() {
 
     return fullDate;
 }
-
 
 
 /// ARRAYS OBJECT FOR ICON COMPARITION ///
@@ -77,6 +76,7 @@ let iconsObj = {
     }
 }
 
+/// GET ICON FOR THE RESPECTIVE WEATHER ///
 
 function iconSelector(obj){
 
@@ -104,34 +104,24 @@ function iconSelector(obj){
     return img
 } 
 
-function easyCar(e) {
+/// HOURS CAROUSEL ///
+
+function carousel(e) {
+
+    let slider = document.querySelector(".slider");
 
     let event = e.target.classList.contains("up") ? "up" : "down"
 
     if(event === "up") {
-       elements.slider.firstElementChild.classList.add("show")
-       elements.slider.lastElementChild.classList.remove("show")  
+       slider.firstElementChild.classList.add("show")
+       slider.lastElementChild.classList.remove("show")  
     } else if (event === "down") {
-        elements.slider.firstElementChild.classList.remove("show")
-        elements.slider.lastElementChild.classList.add("show")
+        slider.firstElementChild.classList.remove("show")
+        slider.lastElementChild.classList.add("show")
     } 
 }
 
-
-let elements = {
-    btnUp: document.querySelector(".up")
-    .addEventListener("click", /* carousel.sliderUp */easyCar),
-
-    btnDown: document.querySelector(".down")
-    .addEventListener("click", /* carousel.sliderDown */easyCar),
-
-    slider: document.querySelector(".slider")
-}
        
-     
-
-
-
 /// FUNCTION TO COMPARE OBJECTS RETRIEVED BY THE API (ITS PROPERTIES, VALUES, ETC) ///
 
 
@@ -181,40 +171,3 @@ function compareObjects (data, data2, data3){
 
     console.log("idem:", idem)
 }
-
-
-
-
-
-
-/* let carousel = {
-    
-    val: 0,
-    
-    sliderUp(e) {
-
-        let value = 47
-    
-        if(carousel.val === 0 || elements.slider.firstElementChild.classList.contains("once")) {return}
-
-        elements.slider.firstElementChild.classList.add("once")
-        elements.slider.lastElementChild.classList.remove("once")
-
-        carousel.val += value
-        elements.slider.style.marginTop = `${carousel.val}rem`
-    },
-
-    sliderDown(e) {
-
-       let value = -47 
-
-        if(elements.slider.lastElementChild.classList.contains("once")) {return}
-
-        elements.slider.firstElementChild.classList.remove("once")
-        elements.slider.lastElementChild.classList.add("once")
-
-        carousel.val += value
-        elements.slider.style.marginTop = `${carousel.val}rem`
-
-    }
-} */

@@ -2,6 +2,7 @@ import {CurrentWeather, Day, Hour, Location} from "./class"
 
 export {triggerDataStructuration}
 
+/// DATA STRUCTURATION HANDLER ///
 
 function triggerDataStructuration (dataForecast, dataHistory){
 
@@ -12,6 +13,7 @@ function triggerDataStructuration (dataForecast, dataHistory){
     return [location, forecastArr, historyArr]
 }
 
+/// STRUCTURE TODAY, TOMORROW AND LASTDAY DATA ///
 
 function getForecastData(obj) {
 
@@ -38,6 +40,8 @@ function getForecastData(obj) {
     return forecastArr
 }
 
+/// STRUCTURE YESTERDAY DATA ///
+
 function getHistoryData(obj) {
 
     let [rawYesterdayArr] = obj.forecast.forecastday
@@ -51,6 +55,8 @@ function getHistoryData(obj) {
     return yesterdayObj
 }
 
+/// STRUCTURE LOCATION DATA ///
+
 function getLocation(obj) {
 
     let location = obj.location
@@ -58,6 +64,12 @@ function getLocation(obj) {
 
     return locationObj
 }
+
+
+////// HELPERS //////
+            
+
+/// STRUCTURE CURRENT DATA ///
 
 function getCurrentWeather(obj){ 
 
@@ -67,6 +79,8 @@ function getCurrentWeather(obj){
 
     return weatherObj
 }
+
+/// STRUCTURE HOURS DATA ///
 
 function getHours(arr) {
 

@@ -1,5 +1,7 @@
 export {CurrentWeather, Day, Hour, Location}
 
+/// CLASS FOR CURRENT STRUCTURATION ///
+
 class CurrentWeather {
     constructor(obj, date){
         this.weatherText = obj.condition.text,
@@ -17,6 +19,8 @@ class CurrentWeather {
     }
 }
 
+/// CLASS FOR HOUR STRUCTURATION ///
+
 class Hour extends CurrentWeather {
     constructor(obj, date, time){
         super(obj)
@@ -26,6 +30,8 @@ class Hour extends CurrentWeather {
         this.time = time
     }
 }
+
+/// CLASS FOR DAY  STRUCTURATION ///
 
 class Day {
     constructor(obj, date, objCurrent){
@@ -51,6 +57,8 @@ class Day {
         this.isHistory = false
     }
 }
+
+/// CLASS FOR LOCATION STRUCTURATION ///
 
 class Location {
     constructor(obj){

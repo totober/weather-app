@@ -1,15 +1,9 @@
 import imgFace from "./img/confused-black-line.svg";
-
 import { iconSelector } from "./auxiliaries"
 
 export {setPrincipalData, setNearData, setExtraData, setHourData, createErrorCard}
 
-function createElement(element, className) {
-
-    let el = document.createElement(element)
-    el.classList.add(className)
-    return el
-}
+/// CREATE COMMON CARD ///
 
 function createCard(){
 
@@ -40,6 +34,8 @@ function createCard(){
     return {card, cardArr}
 }
 
+/// SET DATA OF PRINCIPAL CARD ///
+
 function setPrincipalData(className, weatherObj, locationObj, attributeVal) {
 
     let tempOpt = document.querySelector("ul :nth-child(2)")
@@ -69,6 +65,8 @@ function setPrincipalData(className, weatherObj, locationObj, attributeVal) {
     
     return card
 }
+
+/// SET DATA OF EXTRA CARD ///
 
 function setExtraData(className, weatherObj) {
 
@@ -106,6 +104,8 @@ function setExtraData(className, weatherObj) {
     return card
 }
 
+/// SET DATA OF EACH DAY CARD ///
+
 function setNearData(className, weatherObj) {
 
     let tempOpt = document.querySelector("ul :nth-child(2)")
@@ -126,6 +126,8 @@ function setNearData(className, weatherObj) {
     return card
 }
 
+/// SET DATA OF HOUR CARD ///
+
 function setHourData(className, weatherObj) {
 
     let tempOpt = document.querySelector("ul :nth-child(2)")
@@ -145,6 +147,8 @@ function setHourData(className, weatherObj) {
     return card
 }
 
+/// CREATE AND SET DATA OF ERROR CARD ///
+
 function createErrorCard(){
 
     let err = createElement("div", "error")
@@ -158,6 +162,17 @@ function createErrorCard(){
     return err
 }
 
+/// HELP CREATE ELEMENTS ///
+
+function createElement(element, className) {
+
+    let el = document.createElement(element)
+    el.classList.add(className)
+    return el
+}
+
+
+/// SET DATA FOR ALL THE CARDS ///
 
 /* function setCardData(className, weatherObj, locationObj, attributeName) {
 

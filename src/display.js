@@ -2,6 +2,7 @@ import {setCardData, setPrincipalData, setNearData, setExtraData, setHourData, c
 
 export {triggerDataDisplay, renderError}
 
+/// DATA DISPLAY HANDLER ///
 
 function triggerDataDisplay(location, forecastArr, historyArr, day = "today"){
 
@@ -35,9 +36,11 @@ function triggerDataDisplay(location, forecastArr, historyArr, day = "today"){
     renderPrincipal(chosenDay, location, attributeVal)
     renderHours(chosenDay)
     renderExtra(chosenDay)
-    // this renders always the same way //
+    // THIS RENDER ALWAYS THE SAME WAY //
     renderNear(forecastArr, historyArr)
 }
+
+/// RENDER THE HOURS OF THE DAY ///
 
 function renderHours(forecast){
 
@@ -60,6 +63,7 @@ function renderHours(forecast){
 }
 
 
+/// RENDER PRINCIPAL DATA OF THE DAY ///
 
 function renderPrincipal(weatherObj, location, attributeVal){
     
@@ -69,7 +73,19 @@ function renderPrincipal(weatherObj, location, attributeVal){
     principalContainer.appendChild(setPrincipalData("card-principal", weatherObj, location, attributeVal))
 }
 
+/// RENDER EXTRA DATA OF THE DAY ///
 
+function renderExtra(forecast){
+
+    let extraData = forecast.day
+
+    let extraContainer = document.querySelector(".extra")
+    extraContainer.innerHTML = "";
+
+    extraContainer.appendChild(setExtraData("card-extra", extraData));
+}
+
+/// RENDER ALL DAYS: YESTERDAY, TODAY, TOMORROW, LASTDAY ///
 
 function renderNear(forecastArr, historyArr){
 
@@ -87,17 +103,7 @@ function renderNear(forecastArr, historyArr){
     nearArr[3].appendChild(setNearData("card-near", lastDay.day))
 }
 
-
-function renderExtra(forecast){
-
-    let extraData = forecast.day
-
-    let extraContainer = document.querySelector(".extra")
-    extraContainer.innerHTML = "";
-
-    extraContainer.appendChild(setExtraData("card-extra", extraData));
-}
-
+/// RENDER ERROR ///
 
 function renderError(){
    
@@ -108,6 +114,7 @@ function renderError(){
     principal.appendChild(createErrorCard())
 }
 
+/// HANDLE THE ERROR CLASSES FOR DISPLAY THE CORRECT DATA ///
 
 function handleErrorClass(error){
 
