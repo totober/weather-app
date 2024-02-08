@@ -11,7 +11,7 @@
 }
 
 .theme-dark {
-    --bgc: linear-gradient(to left, #000000, #2D3436);
+    --bgc: linear-gradient(to left, /* #000000, */ red, #2D3436);
     --color-card: rgb(30, 30, 30);
     --color-btn: rgba(52, 52, 52, 0.9);
     --color-font: rgb(237, 234, 222) ; /* #EDEADE */
