@@ -97,10 +97,16 @@ function renderNear(forecastArr, historyArr){
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
+    forecastArr.forEach(el => {
+        el.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
+    })
+    yesterday.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
+
     nearArr[0].appendChild(setNearData("card-near", yesterday.day))
     nearArr[1].appendChild(setNearData("card-near", today.day))
     nearArr[2].appendChild(setNearData("card-near", tomorrow.day))
     nearArr[3].appendChild(setNearData("card-near", lastDay.day))
+
 }
 
 /// RENDER ERROR ///

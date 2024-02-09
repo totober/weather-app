@@ -218,8 +218,9 @@ main {
 
     align-self: center;             
     font-size: 22px;
-    /* font-size:  clamp(1.5rem, 3vw + .5rem, 2rem); */
+    font-size:  clamp(1.4rem, 1.4vw + .5rem, 1.5rem);
     order: 4;
+    text-align: center;
 }
 
 
@@ -237,11 +238,13 @@ main {
 
 .card-principal .place {
       font-size: 22px;
+      font-size:  clamp(1.4rem, 1.45vw + .5rem, 1.5rem);
       font-weight: 600;
   }
 
 .card-principal .date {
     font-size: 1.2rem;
+    font-size:  clamp(1.2rem, 1.2vw + .5rem, 1.3rem);
     font-weight: 400;
     margin-bottom: 1.2rem;
 }
@@ -600,7 +603,7 @@ button.up {
 }
 
 aside button:active {
-    transform: scale(0.96);
+    transform: scale(0.8);
     box-shadow: none;
 }
 
