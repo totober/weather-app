@@ -56,8 +56,11 @@ function setPrincipalData(className, weatherObj, locationObj, attributeVal) {
     `${Number.parseInt(weather.tempF)}º` : `${Number.parseInt(weather.tempC)}º`
                      
     date.setAttribute("data-day", attributeVal)
-    date.textContent = weatherObj.hasOwnProperty("current") ? 
-    "Today, currently" : `${weather.date.slice(8)}/${weather.date.slice(5, 7)}, average tº`;
+    date.textContent = `${weather.date.slice(8)}/${weather.date.slice(5, 7)}, average tº`;
+    if(weatherObj.hasOwnProperty("current")) {
+       date.textContent = weather.isDay ? "Today, currently" : "Tonight, currently" 
+    }
+    
 
 
     wrapper.appendChild(place)

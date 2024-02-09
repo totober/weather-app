@@ -9,6 +9,9 @@ function triggerDataDisplay(location, forecastArr, historyArr, day = "today"){
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
+    isDayorNight(forecastArr)
+    isDayorNight(yesterday)
+
     handleErrorClass(false)
 
    let chosenDay;
@@ -97,17 +100,12 @@ function renderNear(forecastArr, historyArr){
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
-    forecastArr.forEach(el => {
-        el.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
-    })
-    yesterday.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
-
     nearArr[0].appendChild(setNearData("card-near", yesterday.day))
     nearArr[1].appendChild(setNearData("card-near", today.day))
     nearArr[2].appendChild(setNearData("card-near", tomorrow.day))
     nearArr[3].appendChild(setNearData("card-near", lastDay.day))
-
 }
+
 
 /// RENDER ERROR ///
 
@@ -141,4 +139,18 @@ function handleErrorClass(error){
         
         elements.forEach(el => el.classList.remove("error"))
     }
+}
+
+/// CHECK IF CURRENTLY IS DAY OR NIGHT FOR RENDERING DATA WITH CORRECT ICONS ///
+
+function isDayorNight(object) {
+
+    if(Array.isArray(object)){
+
+    object.forEach(el => {
+        el.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
+    })
+    } else {
+        object.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
+    }  
 }

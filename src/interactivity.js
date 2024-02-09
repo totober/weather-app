@@ -53,6 +53,8 @@ function getInputValue(e){
     let inputVal = elements.input.value 
 
     getData(inputVal)
+
+    elements.input.value = ""
 }
 
 /// LISTEN FOR CARD SELECTION FROM THE USER AND DISPLAY THE DATA ///

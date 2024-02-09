@@ -90,9 +90,6 @@ function retrieveData(){
 
 
 
-
-
-
 /// EXAMPLE OF THE URL USED FOR THE API AND THE DIFFERENT PARTS ///
 
 /* let example = "https://api.weatherapi.com/v1/current.json?key=11111111111111111&q=london"
