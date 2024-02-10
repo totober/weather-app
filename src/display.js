@@ -9,6 +9,7 @@ function triggerDataDisplay(location, forecastArr, historyArr, day = "today"){
     let [today, tomorrow, lastDay] = forecastArr
     let yesterday = historyArr
 
+
     isDayorNight(forecastArr)
     isDayorNight(yesterday)
 
@@ -148,9 +149,26 @@ function isDayorNight(object) {
     if(Array.isArray(object)){
 
     object.forEach(el => {
+
         el.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
+        changeWeatherText(el)
     })
     } else {
+
         object.day.isDay = JSON.parse(localStorage.getItem("forecastArr"))[0].current.isDay;
+        changeWeatherText(object)
     }  
+}
+
+/// CHECK THE WATHERTEXT PROPERTY AND CHANGE IT TO ALLOW THE CORRECT ICON RENDERING ///
+
+function changeWeatherText(el) {
+
+    if(el.day.isDay === false && el.day.weatherText.trim().toLowerCase() === "sunny"){
+
+        el.day.weatherText = "Clear"
+    } else if (el.day.isDay && el.day.weatherText.trim().toLowerCase() === "clear") {
+
+        el.day.weatherText = "Sunny"
+    }
 }

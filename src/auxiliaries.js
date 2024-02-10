@@ -102,6 +102,8 @@ function iconSelector(obj){
     }
 
     return img
+
+
 } 
 
 /// HOURS CAROUSEL ///
@@ -119,6 +121,34 @@ function carousel(e) {
         slider.firstElementChild.classList.remove("show")
         slider.lastElementChild.classList.add("show")
     } 
+}
+
+/// FUNCTION TO GET AND ORDER WEATHERTEXT LENGHTS, SO THEN I CAN USE STRINGCUT() FUNCTION ///
+
+function stringLength() {
+
+    let arrWeatherText = [];
+
+    iconsObj.dayArr().forEach(arr => {
+
+        let arrString = arr.toSpliced(-1, 1)
+
+        arrString.forEach(el => {
+
+            let obj = {
+                name : el,
+                length : el.length
+            } 
+
+           arrWeatherText.push(obj)
+        })
+    }) 
+
+    arrWeatherText.sort((a, b) => {
+        return b.length - a.length
+    })
+
+    console.log(arrWeatherText) 
 }
 
        
@@ -171,3 +201,6 @@ function compareObjects (data, data2, data3){
 
     console.log("idem:", idem)
 }
+
+
+

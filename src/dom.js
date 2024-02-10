@@ -48,7 +48,7 @@ function setPrincipalData(className, weatherObj, locationObj, attributeVal) {
     let weather = weatherObj.hasOwnProperty("current") ? weatherObj.current : weatherObj.day;
 
     img.src = iconSelector(weather);
-    sub.textContent = weather.weatherText;
+    sub.textContent = stringCut(weather.weatherText);
     place.textContent = `${locationObj.name}, ${locationObj.country}`; 
 
 
@@ -119,7 +119,7 @@ function setNearData(className, weatherObj) {
     let {0: img, 1: sub, 3: temp, 6: date } = cardArr
 
     img.src = iconSelector(weatherObj);
-    sub.textContent = weatherObj.weatherText;
+    sub.textContent = stringCut(weatherObj.weatherText);
     date.textContent = `${weatherObj.date.slice(8)}/${weatherObj.date.slice(5, 7)}`;
 
     temp.textContent = tempOpt.classList.contains("fara") ? 
@@ -141,7 +141,7 @@ function setHourData(className, weatherObj) {
     let {0: img, 1: sub, 3: temp, 9: time} = cardArr
 
     img.src = iconSelector(weatherObj);
-    sub.textContent = weatherObj.weatherText;
+    sub.textContent = stringCut(weatherObj.weatherText);
     time.textContent = weatherObj.time;
 
     temp.textContent = tempOpt.classList.contains("fara") ? 
@@ -172,6 +172,31 @@ function createElement(element, className) {
     let el = document.createElement(element)
     el.classList.add(className)
     return el
+}
+
+/// CUT WEATHERTEXT THAT IS TOO LONG TO FIT IN THE CONTAINER ///
+
+function stringCut(objProp) {
+
+    let str = objProp
+
+    switch (true) {
+
+        case str === "Moderate or heavy rain with thunder":
+            str = "Moderate/heavy rain with thunder"
+            break;
+        case str === "Moderate or heavy snow with thunder":
+            str = "Moderate/heavy rain snow thunder"
+            break;
+        case str === "Patchy light rain in area with thunder":
+            str = "Patchy light rain with thunder"
+            break;
+        case str === "Moderate or heavy showers of ice pellets":
+            str = "Mod/heavy showers of ice pellets"
+            break;
+    }  
+
+    return str
 }
 
 
